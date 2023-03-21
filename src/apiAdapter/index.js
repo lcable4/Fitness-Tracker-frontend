@@ -1,0 +1,1 @@
+const BASE_URL = "https://fitnesstracker-65db.onrender.com/api";

@@ -3,9 +3,12 @@ import { Navbar } from "./";
 
 const Main = () => {
     return(
+        <>
         <div id="main">
             <Navbar />
         </div>
+        <h1>hello</h1>
+        </>
     )
 }
 
