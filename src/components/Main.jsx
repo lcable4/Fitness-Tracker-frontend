@@ -5,12 +5,14 @@ import { Navbar,
         Registration,
         HomePage,
         Routines,
+        User,
         Activities,
      } from "./";
 
 const Main = () => {
     const [loggedIn, setLoggedIn] = useState(false);
     const [currentUser, setCurrentUser] = useState([]);
+    console.log(loggedIn , "LOGGEDIN LOG MAIN")
     return(
         <>
         <div id="main">
@@ -52,10 +54,20 @@ const Main = () => {
                             }
                         />
                         <Route 
+                        path="/myRoutines"
+                        element={
+                            <User
+                                setCurrentUser={setCurrentUser}
+                                setLoggedIn={setLoggedIn}
+                            />
+                            }
+                        />
+                        <Route 
                         path="/activities"
                         element={
                             <Activities
                                 setCurrentUser={setCurrentUser}
+                                loggedIn={loggedIn}
                                 setLoggedIn={setLoggedIn}
                             />
                             }

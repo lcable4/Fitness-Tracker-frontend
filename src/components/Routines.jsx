@@ -1,8 +1,27 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "./";
-// import { deletePost };
-// import { Link };
-// import { }
+
+
+const Main = ({posts, setPosts}) => {
+
+    
+  async function retrievePosts () {
+      const myPosts = await getPosts()
+      setPosts (myPosts.data.posts)
+      console.log("myposts", myPosts)
+
+  }
+  useEffect(() => {
+      retrievePosts()
+  }, [])
+
+
+  return(
+      <div id="main">
+          <PostList posts={posts} setPosts={setPosts}/>
+      </div>
+  )
+}
+
 
 const RoutineView = ({routine, routines, setRoutines}) => {
   const handleDelete = (id) => {
@@ -33,4 +52,4 @@ const RoutineView = ({routine, routines, setRoutines}) => {
   )
 }
 
-export default RoutineList
+export default RoutineView;
