@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../apiAdapter";
-import { Navbar } from "./"
+
 
 
 export default function Login() {
@@ -21,15 +21,19 @@ export default function Login() {
       try {
         const result = await loginUser(username, password);
         console.log(result)
-        if (result.message = "you're logged in!") {
+        if (result.token) {
             console.log(result)
             setResponse(result.token);
             setUsername("");
             setPassword("");
             setSubmitMessage("Successfully logged in!");
-            navigate('/')
-            localStorage.setItem('token', result.token)
-        } 
+            // navigate('/')
+            localStorage.setItem(`token-${username}`, result.token)
+        } else if(result.error) {
+          setErrorMessage("There was an error trying to login, Please try again")
+          setUsername("");
+          setPassword("");
+        }
         
         console.log(response);
       } catch (error) {

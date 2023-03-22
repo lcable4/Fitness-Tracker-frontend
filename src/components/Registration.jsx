@@ -42,7 +42,6 @@ export default function Registration() {
                 setNewUserPass("");
                 setPassVerification("")
 
-                localStorage.setItem(name, password);
                 localStorage.setItem(`token-${newUserName}`, result.data.token)
             } else {
                 setErrorMessage(result.error.message)
