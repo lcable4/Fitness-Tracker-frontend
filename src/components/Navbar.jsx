@@ -43,7 +43,11 @@ const Navbar = (props) => {
           <Link className="navBtns" to="/login">
             Login
           </Link>
+          <Link className="navBtns" to="/registration">
+            Register
+          </Link>
         </div>
+        
       )}
     </div>
   );
