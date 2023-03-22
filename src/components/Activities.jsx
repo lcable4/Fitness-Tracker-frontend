@@ -74,9 +74,7 @@ function Activities(props) {
       )}
       {errorMessage && <div>{errorMessage}</div>}
       {submitMessage && <p>{submitMessage}</p>}
-      <ul>
-        {activities.reverse().map(activity => (
-          <li key={activity.id}>{activity.name}</li>
+
         ))}
       </ul>
       
