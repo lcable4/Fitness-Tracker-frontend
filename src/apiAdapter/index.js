@@ -9,6 +9,9 @@ export const getRoutines = async () => {
                 Authorization: `Bearer ${token}`,
             },
         });
+
+        const result = await response.json();
+        return result
     } catch (error) {
         console.error(error);
     }

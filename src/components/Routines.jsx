@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import Navbar from "./";
 // import { deletePost };
 // import { Link };
 // import { }
@@ -11,6 +12,7 @@ const RoutineView = ({routine, routines, setRoutines}) => {
   return (
       <>
       <div id="routine-view">
+          <h1>Testing</h1>
           <h1 id="name">{routine.name}</h1>
           <h3 id="description">{routine.description}</h3>
           <h3 id="duration">Duration: {routine.duration}</h3>
