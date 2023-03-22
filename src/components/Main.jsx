@@ -59,6 +59,7 @@ const Main = () => {
                             <User
                                 setCurrentUser={setCurrentUser}
                                 setLoggedIn={setLoggedIn}
+                                loggedIn={loggedIn}
                             />
                             }
                         />
