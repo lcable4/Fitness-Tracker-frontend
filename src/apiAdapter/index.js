@@ -41,3 +41,20 @@ export const loginUser = async (username, password) => {
       console.log(error);
     }
   };
+
+  export const displayActivities = async () => {
+    try {
+      const response = await fetch(`${BASE_URL}/activities`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      const result = await response.json();
+  
+      console.log(result);
+      return result
+    } catch (err) {
+      console.error(err);
+    }
+  }

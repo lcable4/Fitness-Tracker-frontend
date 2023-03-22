@@ -12,7 +12,7 @@ export default function Login(props) {
   const [password, setPassword] = useState("");
   const [response, setResponse] = useState("");
   const [submitMessage, setSubmitMessage] = useState("");
-  let [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   
   const setCurrentUser = (user) => {
@@ -23,11 +23,9 @@ export default function Login(props) {
 const handleClick = async (event) => {
   event.preventDefault();
   const result = await loginUser(username, password);
-  console.log(result)
   if (result && result.token) {
     localStorage.setItem(`token-${username}`, result.token)
     props.setLoggedIn(true)
-    console.log(result)
     setResponse(result.token);
     setUsername("");
     setPassword("");
