@@ -4,9 +4,10 @@ import { loginUser } from "../apiAdapter";
 
 
 
-export default function Login() {
-  
+export default function Login(props) {
+  console.log(props, "PROPS LOG")
   const [login, setLogin] = useState("");
+  const [user, setUser] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [response, setResponse] = useState("");
@@ -14,88 +15,75 @@ export default function Login() {
   let [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   
+  const setCurrentUser = (user) => {
+    localStorage.setItem("currentUser", JSON.stringify(user));
+    setUser(user);
+  };
 
+const handleClick = async (event) => {
+  event.preventDefault();
+  const result = await loginUser(username, password);
+  console.log(result)
+  if (result && result.token) {
+    localStorage.setItem(`token-${username}`, result.token)
+    props.setLoggedIn(true)
+    console.log(result)
+    setResponse(result.token);
+    setUsername("");
+    setPassword("");
+    setSubmitMessage("Successfully logged in!");
 
-
-  async function onLogin(username, password) {
-      try {
-        const result = await loginUser(username, password);
-        console.log(result)
-        if (result.token) {
-            console.log(result)
-            setResponse(result.token);
-            setUsername("");
-            setPassword("");
-            setSubmitMessage("Successfully logged in!");
-            // navigate('/')
-            localStorage.setItem(`token-${username}`, result.token)
-        } else if(result.error) {
-          setErrorMessage("There was an error trying to login, Please try again")
-          setUsername("");
-          setPassword("");
-        }
-        
-        console.log(response);
-      } catch (error) {
-        setErrorMessage("Incorrect login please try again!!")
-        setUsername("");
-        setPassword("");
-        console.log(error);
-      }
-    }
+} else {
+  
+  setErrorMessage("There was an error trying to login, Please try again")
+  setUsername("");
+  setPassword("");
+  console.log(result.error)
+}
+}
   //userLogin("creator", "12345");
 
   return (
-  <>
- 
-  <div className='loginDiv'>
-      <h1>Login</h1>
-      {errorMessage && <div>{errorMessage}</div>}
-      <form 
-        className='loginForm' 
-        onSubmit={(event)=>
-      {
-          event.preventDefault();
-          onLogin(username, password)//change to async
-          console.log(response); 
-          /*
-          */
-      }
-      }>
-      <p>
-        <label className='loginLabel' >Username:
-            <input name="username" 
-                    type="text" 
-                    value ={username} 
-                    required 
-                    className='loginInput'
-                    onChange={(event)=>
-            {
-                console.log("change");
-                setUsername(event.target.value);
-            }}/>
-        </label>
-      </p>
-      <p>
-        <label className='loginLabel'>Password:
-            <input name="password" 
-                    type="password" 
-                    value={password} 
-                    required 
-                    className='loginInput'
-                    onChange={(event)=>
-            {
-                setPassword(event.target.value);
-            }}/>
-
-        </label>
-      </p>
-      <button type="submit" className='btns'>Log In</button>
-      {submitMessage && <p>{submitMessage}</p>}
-      <Link to="/registration">New user? Register here</Link>
-      </form>
-  <Link className="goBackBtns" to="/">Go Back</Link>
-  </div>
-  </>
-)
-}
+    <>
+      <div className='loginDiv'>
+        <h1>Login</h1>
+        {errorMessage && <div>{errorMessage}</div>}
+        <form className='loginForm' onSubmit={handleClick}>
+          <p>
+            <label className='loginLabel'>Username:
+              <input
+                name="username"
+                type="text"
+                value={username}
+                required
+                className='loginInput'
+                onChange={(event) => {
+                  console.log("change");
+                  setUsername(event.target.value);
+                }}
+              />
+            </label>
+          </p>
+          <p>
+            <label className='loginLabel'>Password:
+              <input
+                name="password"
+                type="password"
+                value={password}
+                required
+                className='loginInput'
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                }}
+              />
+            </label>
+          </p>
+          <button type="submit" className='btns'>Log In</button>
+          {submitMessage && <p>{submitMessage}</p>}
+          <Link to="/registration">New user? Register here</Link>
+        </form>
+        <Link className="goBackBtns" to="/">Go Back</Link>
+      </div>
+    </>
+  )
+              }

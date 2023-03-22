@@ -14,6 +14,7 @@ export const registerUser = async (username, password) => {
         }),
       });
       const result = await response.json();
+      console.log(result, "RESULTS LOG")
       return result;
     } catch (error) {
       console.log(error);
@@ -23,7 +24,6 @@ export const registerUser = async (username, password) => {
 
 export const loginUser = async (username, password) => {
     try {
-      console.log(`${BASE_URL}/users/login`);
       const response = await fetch(`${BASE_URL}/users/login`, {
         method: "POST",
         headers: {
@@ -35,7 +35,7 @@ export const loginUser = async (username, password) => {
         }),
       });
       const result = await response.json();
-      console.log(result);
+      console.log(result, "RESULTS LOG");
       return result;
     } catch (error) {
       console.log(error);

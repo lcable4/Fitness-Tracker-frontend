@@ -21,30 +21,19 @@ export default function Registration() {
         
         
         try {
-            const response = await fetch('https://strangers-things.herokuapp.com/api/2301-FTB-ET-WEB-FT/users/register', {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    user: {
-                        username: newUserName,
-                        password: newUserPass,
-                    }
-                })
-            });
-
-            const result = await response.json();
+            
+            const result = await registerUser(name, password);
+            console.log(result, "RESULT LOG")
             if(result.success) {
+                localStorage.setItem(`token-${newUserName}`, result.data.token)
                 setNewUser(result.data.token);
                 setSubmitMessage("Successfully registered!");
                 setNewUserName("");
                 setNewUserPass("");
                 setPassVerification("")
 
-                localStorage.setItem(`token-${newUserName}`, result.data.token)
             } else {
-                setErrorMessage(result.error.message)
+                setErrorMessage("An error occurred during registration")
             }
         } catch (error) {
             setErrorMessage("Passwords do not match.")
