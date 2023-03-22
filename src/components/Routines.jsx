@@ -21,7 +21,7 @@ const RoutineView = ({routine, routines, setRoutines}) => {
                   <Link to="/EditRoutine"><button>Edit Routine</button></Link> 
               </div>
               ):  checkUserLoggedIn() ? (
-                  <Link to="/MessagePosts" state={{ id: routine._id }}>
+                  <Link to="/editRoutine" state={{ id: routine._id }}>
                   <button type="button"></button>
                   </Link>) :
                   <div></div>
