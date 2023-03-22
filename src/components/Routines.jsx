@@ -18,7 +18,7 @@ const RoutineView = ({routine, routines, setRoutines}) => {
           {routine.isAuthor ? (
               <div>
                   <button onClick={() => handleDelete(routine._id)}>Delete</button>
-                  <Link to="/EditPost"><button>Edit Post</button></Link> 
+                  <Link to="/EditRoutine"><button>Edit Routine</button></Link> 
               </div>
               ):  checkUserLoggedIn() ? (
                   <Link to="/MessagePosts" state={{ id: routine._id }}>
