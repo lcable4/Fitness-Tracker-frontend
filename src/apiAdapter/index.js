@@ -58,3 +58,26 @@ export const loginUser = async (username, password) => {
       console.error(err);
     }
   }
+
+  export const postActivity = async (name, description) => {
+    try {
+      const response = await fetch(`${BASE_URL}/activities`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          name: name,
+          description: description,
+        }) 
+      });
+  
+      const result = await response.json();
+  
+      console.log(result);
+      return result
+    } catch (err) {
+      console.error(err);
+    }
+  }
