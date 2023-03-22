@@ -11,3 +11,15 @@ body {
     max-height: 10%;
     min-height: 40px;
 }
+.HomePage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.homeImg {
+    height: 700px;
+    width: 90%;
+    padding: 8px;
+    opacity: 60%;
+}
