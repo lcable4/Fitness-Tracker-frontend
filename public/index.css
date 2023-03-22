@@ -11,3 +11,34 @@ body {
     max-height: 10%;
     min-height: 40px;
 }
+.activityListDiv{
+    height: 750px;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    overflow-x: hidden;
+    border: 1px solid black;
+    margin: 5px;
+}
+.activityList {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+    border: 1px solid black;
+    margin: 5px;
+    background-color: lightgray;
+}
+.activityLabels{
+    border-bottom: 1px solid black;
+    text-align: center;
+    padding: 10px;
+}
+.activityPtags{
+    margin: 0;
+}
+.activity{
+    height: 40%;
+}

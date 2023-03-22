@@ -74,9 +74,19 @@ function Activities(props) {
       )}
       {errorMessage && <div>{errorMessage}</div>}
       {submitMessage && <p>{submitMessage}</p>}
-      <ul>
-        {activities.map(activity => (
-          <li key={activity.id}>{activity.name}</li>
+      <ul className="activityListDiv">
+        {activities.reverse().map(activity => (
+          <div className='activity'>
+            <li key={activity.id} className="activityList">
+              <label className='activityLabels'>Activity Name: </label>
+              <br />
+              <p className='activityPtags'>{activity.name}</p>
+              <br />
+              <label className='activityLabels'>Activity Description: </label>
+              <br />
+              <p className='activityPtags'>{activity.description}</p>
+              </li>
+          </div>
         ))}
       </ul>
       
