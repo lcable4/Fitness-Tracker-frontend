@@ -5,6 +5,7 @@ import { Navbar,
         Registration,
         HomePage,
         Routines,
+        myRoutines,
         Activities,
      } from "./";
 
@@ -44,6 +45,15 @@ const Main = () => {
                         />
                         <Route 
                         path="/routines"
+                        element={
+                            <Routines
+                                setCurrentUser={setCurrentUser}
+                                setLoggedIn={setLoggedIn}
+                            />
+                            }
+                        />
+                        <Route 
+                        path="/myRoutines"
                         element={
                             <Routines
                                 setCurrentUser={setCurrentUser}
