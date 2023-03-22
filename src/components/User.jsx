@@ -1,6 +1,6 @@
 import React from 'react'
 
-function myRoutines() {
+function User() {
   return (
     <>
     <div className='myRoutines'>
@@ -10,4 +10,4 @@ function myRoutines() {
   )
 }
 
-export default myRoutines
+export default User
