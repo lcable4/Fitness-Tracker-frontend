@@ -3,7 +3,8 @@ import { ReactDOM } from "react-dom";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../apiAdapter";
 
-function Registration() {
+export default function Registration() {
+  
     let[newUser, setNewUser] = useState("");
     let[newUserName, setNewUserName] = useState("");
     let[newUserPass, setNewUserPass] = useState("");
@@ -11,85 +12,112 @@ function Registration() {
     let[submitMessage, setSubmitMessage] = useState("");
     let[errorMessage, setErrorMessage] = useState("");
 
-    const navigate = useNavigate();
-
-    const registerUser = async (username, password) => {
-        if (password !== passVerification ) {
+    async function registerNewUser(name, password) {
+        
+        if (newUserPass !== passVerification) {
             setErrorMessage("Passwords do not match.")
             return;
         }
+        
+        
         try {
-            const result = await registerUser(username, password);
-            console.log(result, "RESULT LOG");
-            if(result) {
+            const response = await fetch('https://strangers-things.herokuapp.com/api/2301-FTB-ET-WEB-FT/users/register', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    user: {
+                        username: newUserName,
+                        password: newUserPass,
+                    }
+                })
+            });
+
+            const result = await response.json();
+            if(result.success) {
                 setNewUser(result.data.token);
                 setSubmitMessage("Successfully registered!");
                 setNewUserName("");
                 setNewUserPass("");
                 setPassVerification("")
 
+                localStorage.setItem(name, password);
                 localStorage.setItem(`token-${newUserName}`, result.data.token)
+            } else {
+                setErrorMessage(result.error.message)
             }
         } catch (error) {
-            setErrorMessage("There was an error registering, please try again.");
+            setErrorMessage("Passwords do not match.")
             console.log(error);
         }
     }
-  return (
-    <>
-    <div className='registrationPage'>
-        <h1>Join the Fitness Tracker Community and Reach Your Goals</h1>
+    
+    return (
+    <>   
+    <div className="registrationDiv">
+        <h1>Register</h1>
         {errorMessage && <div>{errorMessage}</div>}
-        <div className='registrationDiv'>
         <form className="registrationForm" onSubmit={(e) => {
             e.preventDefault();
-            registerUser(newUserName, newUserPass);
-            }}>
-                <label className="registrationLabels">Name:</label>
-                    <input 
-                        type="text" 
-                        id="name"
+            registerNewUser(newUserName, newUserPass);
+        }}>
+            
+                <label className="registrationLabels">
+                    Enter your name:
+                    <br/>
+                    <input
+                        name="name"
+                        type="text"
                         value={newUserName}
                         required
                         className="registrationInputs"
-                        minLength="4"
+                        minLength="5"
                         onChange={(e) => {
                             setNewUserName(e.target.value);
-                        }} 
+                        }}
                     />
-                <br />
-                <label className="registrationLabels">Password:</label>
-                    <input 
+                </label>    
+            
+                <label className="registrationLabels">
+                    Set your new password:
+                    <br/>
+                    <input
+                        name="password"
                         type="password"
-                        id="password"
                         value={newUserPass}
                         required
-                        minLength="8"
+                        className="registrationInputs"
+                        minLength="5"
                         onChange={(e) => {
                             setNewUserPass(e.target.value);
-                        }} 
+                        }}
                     />
-                <br />
-                <label className="registrationLabels">Verify Password:</label>
-                    <input
+                </label>
+            
+                <label className="registrationLabels">
+                    Verify your password:
+                    <br/>
+                    <input 
+                        name="password"
                         type="password"
-                        id="verifyPassword"
                         value={passVerification}
                         required
-                        minLength="8"
+                        className="registrationInputs"
+                        minLength="5"
                         onChange={(e) => {
                             setPassVerification(e.target.value);
-                        }}  />
-                <br />
-                <button className="submitBtn" type="submit">Submit</button>
-                {submitMessage && <p>{submitMessage}</p>}
-                <br />
-            </form> 
-        </div>
-        
-    </div>
+                        }}/>
+                </label>
+            
+            <button className='btns' type="submit">Submit</button>
+            {submitMessage && <p>{submitMessage}</p>}
+            <p>
+            <Link to="/login">Already a user? Sign in</Link>
+            </p>
+        </form>
+        <Link className="goBackBtns" to="/">Go Back</Link>
+    </div>            
     </>
   )
 }
-
-export default Registration

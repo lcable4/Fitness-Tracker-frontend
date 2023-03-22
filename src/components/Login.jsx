@@ -1,55 +1,97 @@
 import React, { useState, useEffect} from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../apiAdapter";
+import { Navbar } from "./"
 
-export default function Login(props) {
-    const [userName, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [user, setUser] = useState("");
-    const navigate = useNavigate();
 
-    const setCurrentUser = (user) => {
-        localStorage.setItem("currentUser", JSON.stringify(user));
-        setUser(user);
-      };
+export default function Login() {
+  
+  const [login, setLogin] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [response, setResponse] = useState("");
+  const [submitMessage, setSubmitMessage] = useState("");
+  let [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
+  
 
-      const handleClick = async (event) => {
-        event.preventDefault();
-        const result = await loginUser(userName, password);
-        console.log(result);
-        if (result && result.token) {
-          localStorage.setItem("token", result.token);
-          setLoggedIn(true);
-          setCurrentUser(userName);
-          navigate("/");
-        } else {
-          console.log(result.error);
-        }
-      }; 
-  return (
-    <>
-    <div className='loginPage'>
-        <h1>Join the Fitness Tracker Community and Reach Your Goals</h1>
-        <div className='loginDiv'>
-            <form onSubmit={handleClick} className='loginForm'>
-                <label htmlFor="name">Name:</label>
-                    <input type="text" id="name" />
-                <br />
-                <label htmlFor="username">Username:</label>
-                    <input type="text" id="username" />
-                <br />
-                <label htmlFor="password">Password:</label>
-                    <input type="password" id="password" />
-                <br />
-                <label htmlFor="verifyPassword">Verify Password:</label>
-                    <input type="password" id="verifyPassword" />
-                <br />
-                <button className="submitBtn" type="submit">Submit</button>
-                <br />
-            </form> 
-        </div>
+
+
+  async function onLogin(username, password) {
+      try {
+        const result = await loginUser(username, password);
+        console.log(result)
+        if (result.message = "you're logged in!") {
+            console.log(result)
+            setResponse(result.token);
+            setUsername("");
+            setPassword("");
+            setSubmitMessage("Successfully logged in!");
+            navigate('/')
+            localStorage.setItem('token', result.token)
+        } 
         
-    </div>
-    </>
-  )
+        console.log(response);
+      } catch (error) {
+        setErrorMessage("Incorrect login please try again!!")
+        setUsername("");
+        setPassword("");
+        console.log(error);
+      }
+    }
+  //userLogin("creator", "12345");
+
+  return (
+  <>
+ 
+  <div className='loginDiv'>
+      <h1>Login</h1>
+      {errorMessage && <div>{errorMessage}</div>}
+      <form 
+        className='loginForm' 
+        onSubmit={(event)=>
+      {
+          event.preventDefault();
+          onLogin(username, password)//change to async
+          console.log(response); 
+          /*
+          */
+      }
+      }>
+      <p>
+        <label className='loginLabel' >Username:
+            <input name="username" 
+                    type="text" 
+                    value ={username} 
+                    required 
+                    className='loginInput'
+                    onChange={(event)=>
+            {
+                console.log("change");
+                setUsername(event.target.value);
+            }}/>
+        </label>
+      </p>
+      <p>
+        <label className='loginLabel'>Password:
+            <input name="password" 
+                    type="password" 
+                    value={password} 
+                    required 
+                    className='loginInput'
+                    onChange={(event)=>
+            {
+                setPassword(event.target.value);
+            }}/>
+
+        </label>
+      </p>
+      <button type="submit" className='btns'>Log In</button>
+      {submitMessage && <p>{submitMessage}</p>}
+      <Link to="/registration">New user? Register here</Link>
+      </form>
+  <Link className="goBackBtns" to="/">Go Back</Link>
+  </div>
+  </>
+)
 }
