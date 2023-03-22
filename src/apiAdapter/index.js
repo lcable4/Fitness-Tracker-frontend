@@ -64,7 +64,7 @@ export const loginUser = async (username, password) => {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          'Authorization': `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify({
           name: name,
@@ -78,6 +78,23 @@ export const loginUser = async (username, password) => {
         const result = await response.json();
         return result;
       }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  export const getMyRoutines = async () => {
+
+    try {
+      const response = await fetch(`${BASE_URL}/users/albert/routines`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const result = await response.json();
+      console.log(result);
+      return result
     } catch (err) {
       console.error(err);
     }
