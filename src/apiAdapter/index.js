@@ -10,4 +10,4 @@ export const getRoutines = async () => {
     } catch (error) {
         console.error(error);
     }
-}
+};
