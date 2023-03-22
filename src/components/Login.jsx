@@ -5,7 +5,7 @@ import { loginUser } from "../apiAdapter";
 
 
 export default function Login(props) {
-  console.log(props, "PROPS LOG")
+ 
   const [login, setLogin] = useState("");
   const [user, setUser] = useState("");
   const [username, setUsername] = useState("");
@@ -24,8 +24,9 @@ const handleClick = async (event) => {
   event.preventDefault();
   const result = await loginUser(username, password);
   if (result && result.token) {
-    localStorage.setItem(`token-${username}`, result.token)
+    localStorage.setItem('token', result.token)
     props.setLoggedIn(true)
+    console.log(props, "PROPS LOG")
     setResponse(result.token);
     setUsername("");
     setPassword("");
@@ -56,7 +57,6 @@ const handleClick = async (event) => {
                 required
                 className='loginInput'
                 onChange={(event) => {
-                  console.log("change");
                   setUsername(event.target.value);
                 }}
               />
