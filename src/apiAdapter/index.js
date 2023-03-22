@@ -52,7 +52,6 @@ export const loginUser = async (username, password) => {
   
       const result = await response.json();
   
-      console.log(result);
       return result
     } catch (err) {
       console.error(err);
@@ -73,10 +72,12 @@ export const loginUser = async (username, password) => {
         }) 
       });
   
-      const result = await response.json();
-  
-      console.log(result);
-      return result
+      if (response.status === 500) {
+        return false;
+      } else {
+        const result = await response.json();
+        return result;
+      }
     } catch (err) {
       console.error(err);
     }

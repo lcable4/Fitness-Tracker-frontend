@@ -29,8 +29,8 @@ function Activities(props) {
   };
 
   const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
-      event.preventDefault();
       let post = await postActivity(name, description);
       if(post) {
         setName("");
@@ -39,11 +39,11 @@ function Activities(props) {
         setActivities(result);
         setSubmitMessage("Succesfully posted activity!")
       } else {
-        setErrorMessage("There was an error with the input")
+        setErrorMessage("That activity already exists")
       }
       
     } catch (error) {
-      setErrorMessage("Error posting please try again")
+      setErrorMessage("An error occurred. Please try again later")
     }
   };
 
