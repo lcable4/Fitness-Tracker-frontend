@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { displayActivities, postActivity } from "../apiAdapter";
 
 
-function Activities(props) {
+export default function Activities(props) {
 
   const [activities, setActivities] = useState([]);
   const [name, setName] = useState("");
@@ -47,39 +47,47 @@ function Activities(props) {
     }
   };
 
-
   return (
     <div className='Activities'>
       <h1>Activities</h1>
       
       {props.loggedIn ? (
-       <form onSubmit={handleSubmit}>
-       <label>
-         Name:
-         <input type="text" value={name} onChange={handleNameChange} />
-       </label>
-       <br />
-       <label>
-         Description:
-         <textarea value={description} onChange={handleDescriptionChange} />
-       </label>
-       <br />
-       <button type="submit">Create new activity</button>
-     </form>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Name:
+            <input type="text" value={name} onChange={handleNameChange} />
+          </label>
+          <br />
+          <label>
+            Description:
+            <textarea value={description} onChange={handleDescriptionChange} />
+          </label>
+          <br />
+          <button type="submit">Create new activity</button>
+        </form>
       ) : (
         <div>
           <p>Login to create an activity</p>
         </div>
-        
       )}
       {errorMessage && <div>{errorMessage}</div>}
       {submitMessage && <p>{submitMessage}</p>}
-
+  
+      <ul className="activityListDiv">
+        {activities.reverse().map(activity => (
+          <div className='activity'>
+            <li key={activity.id} className="activityList">
+              <label className='activityLabels'>Activity Name: </label>
+              <br />
+              <p className='activityPtags'>{activity.name}</p>
+              <br />
+              <label className='activityLabels'>Activity Description: </label>
+              <br />
+              <p className='activityPtags'>{activity.description}</p>
+            </li>
+          </div>
         ))}
       </ul>
-      
     </div>
   );
-}
-
-export default Activities
+        }
