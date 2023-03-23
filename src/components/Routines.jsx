@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { fetchRoutines, postRoutine } from "../apiAdapter";
+import { displayActivities, postActivity } from "../apiAdapter";
 
 
 
 export default function Routines(props) {
 
-  const [activities, setRoutines] = useState([]);
+  const [routines, setRoutines] = useState([]);
   const [name, setName] = useState("");
   const [goal, setgoal] = useState("");
+  const [activites, setActivities] = useState("")
   const [errorMessage, setErrorMessage] = useState("")
   const [submitMessage, setSubmitMessage] = useState("");
   
   useEffect(() => {
     async function getRoutines() {
       const result = await fetchRoutines();
+      console.log(result)
       setRoutines(result);
 
     }
@@ -21,21 +24,35 @@ export default function Routines(props) {
     getRoutines();
   }, []);
 
+  useEffect(() => {
+    async function getActivities() {
+      const result = await displayActivities();
+      setActivities(result);
+    }
+
+    getActivities();
+  })
+
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
 
-  const handlegoalChange = (event) => {
+  const handleGoalChange = (event) => {
     setgoal(event.target.value);
   };
+
+  // const handleActivitiesChange = (event) => {
+  //   setActivites(event.target.value);
+  // }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      let post = await postRoutine(name, goal);
+      let post = await postRoutine(name, goal, activites);
       if(post) {
         setName("");
         setgoal("");
+        setActivites("")
         const result = await fetchRoutines();
         setRoutines(result);
         setSubmitMessage("Succesfully posted routine!")
@@ -64,9 +81,14 @@ export default function Routines(props) {
           <label>
             Routine goal:
             <br />
-            <textarea value={goal} onChange={handlegoalChange} />
+            <textarea value={goal} onChange={handleGoalChange} />
           </label>
           <br />
+          <label>
+            Routine Activities:
+            <br />
+            <textarea value={activites} onChange={handleActivitiesChange} />
+          </label>
           <button type="submit">Submit new routine</button>
         </form>
         </>
@@ -79,7 +101,7 @@ export default function Routines(props) {
       {submitMessage && <p>{submitMessage}</p>}
   
       <ul className="routineListDiv">
-        {activities.reverse().map(routine => (
+        {routines.reverse().map(routine => (
           <div className='routine' key={routine.id}>
             <li  className="routineList">
               <label className='routineLabels'>Routine Name: </label>
@@ -89,6 +111,18 @@ export default function Routines(props) {
               <label className='routineLabels'>Routine goal: </label>
               <br />
               <p className='routinePtags'>{routine.goal}</p>
+              <br />
+              <label className='routineActivites'>Routine Activites</label>
+              <br />
+              {routines.activities.map(activites => {
+                <div className='activities'>
+                  <li className ="routineActivities">
+                    <label className="activityLabels"/>
+                    <p></p>
+
+                  </li>
+                </div>
+              })}
             </li>
           </div>
         ))}
