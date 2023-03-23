@@ -3,8 +3,11 @@ import React from 'react'
 function Routines() {
   return (
     <>
-    <div className='Routines'>
+    <div className='componentHeaders'>
         <h1>Routines</h1>
+
+    </div>
+    <div className='Routines'>
     </div>
     </>
   )

@@ -21,6 +21,14 @@ body {
     height: 40px;
 }
 
+body{
+
+    height: 100%;
+    width: 100%;
+    background-color: #023047ff;
+    color: white;
+    overflow-x: hidden;
+}
 .navLinksDiv {
     flex: 1;
     border: 1px solid gray;
@@ -33,12 +41,26 @@ body {
     text-decoration: none;
     height: 100%
 }
-body{
-
-    height: 100%;
-    width: 100%;
-    background-color: #023047ff;
-    color: white;
+.componentHeaders {
+    display: flex;
+    border-bottom: 1px solid #ffb703ff;
+    justify-content: center;
+}
+.loginDiv, .registrationDiv {
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 1px solid #ffb703ff;
+    background-color: rgba(246, 169, 80, 0.98);
+    margin-top: 150px;
+}
+.loginForm, .registrationForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .HomePage {
     display: flex;

@@ -11,6 +11,7 @@ export default function Registration() {
     let[passVerification, setPassVerification] = useState("");
     let[submitMessage, setSubmitMessage] = useState("");
     let[errorMessage, setErrorMessage] = useState("");
+    const navigate = useNavigate();
 
     async function registerNewUser(name, password) {
         
@@ -31,7 +32,7 @@ export default function Registration() {
                 setNewUserName("");
                 setNewUserPass("");
                 setPassVerification("")
-
+                navigate("/login")
             } else {
                 setErrorMessage("An error occurred during registration")
             }
@@ -43,8 +44,11 @@ export default function Registration() {
     
     return (
     <>   
-    <div className="registrationDiv">
+    <div className="componentHeaders">
         <h1>Register</h1>
+
+    </div>
+    <div className="registrationDiv">
         {errorMessage && <div>{errorMessage}</div>}
         <form className="registrationForm" onSubmit={(e) => {
             e.preventDefault();
@@ -52,7 +56,7 @@ export default function Registration() {
         }}>
             
                 <label className="registrationLabels">
-                    Enter your name:
+                    Enter your username:
                     <br/>
                     <input
                         name="name"

@@ -19,8 +19,11 @@ function User(props) {
   }, []);
   return (
     <>
+    <div className="componentHeaders">
+        <h1>These are your Routines</h1>
+
+    </div>
     <div className='myRoutines'>
-        <h3>These are your Routines</h3>
         <ul>
         {myRoutines.map(activity => (
           <li key={activity.id}>{activity.name}</li>

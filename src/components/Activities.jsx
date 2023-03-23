@@ -48,8 +48,12 @@ export default function Activities(props) {
   };
 
   return (
-    <div className='Activities'>
+    <>
+    <div className='componentHeaders'>
+
       <h1>Activities</h1>
+    </div>
+    <div className='Activities'>
       
       {props.loggedIn ? (
         <>
@@ -93,5 +97,6 @@ export default function Activities(props) {
         ))}
       </ul>
     </div>
+    </>
   );
         }

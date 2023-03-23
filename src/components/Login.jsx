@@ -31,7 +31,7 @@ const handleClick = async (event) => {
     setUsername("");
     setPassword("");
     setSubmitMessage("Successfully logged in!");
-
+    navigate("/")
 } else {
   
   setErrorMessage("There was an error trying to login, Please try again")
@@ -44,8 +44,11 @@ const handleClick = async (event) => {
 
   return (
     <>
+      <div className='componentHeaders'>
+      <h1>Login</h1>
+
+      </div>
       <div className='loginDiv'>
-        <h1>Login</h1>
         {errorMessage && <div>{errorMessage}</div>}
         <form className='loginForm' onSubmit={handleClick}>
           <p>
@@ -78,6 +81,7 @@ const handleClick = async (event) => {
           </p>
           <button type="submit" className='btns'>Log In</button>
           {submitMessage && <p>{submitMessage}</p>}
+          <br />
           <Link to="/registration">New user? Register here</Link>
         </form>
         <Link className="goBackBtns" to="/">Go Back</Link>
