@@ -22,7 +22,7 @@ function User(props) {
     <div className='myRoutines'>
         <h3>These are your Routines</h3>
         <ul>
-        {myRoutines.reverse().map(activity => (
+        {myRoutines.map(activity => (
           <li key={activity.id}>{activity.name}</li>
         ))}
       </ul>
