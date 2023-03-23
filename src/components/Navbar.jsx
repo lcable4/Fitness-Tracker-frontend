@@ -18,36 +18,43 @@ const Navbar = (props) => {
 
   return (
     <div id="navbar">
-      <Link to="/" className="navBtns">
-        HOME
-      </Link>
-      
-      <Link to="/routines" className="navBtns">
-        All Routines
-      </Link>
-
-      <Link to="/myRoutines" className="navBtns">
-        My Routines
-      </Link>
-      
-      <Link to="/activities" className="navBtns">
-        Activities
-      </Link>
-
+      <div className="navLinksDiv">
+        <Link to="/" className="navLinks">
+          Home
+        </Link>
+      </div>
+      <div className="navLinksDiv">
+        <Link to="/routines" className="navLinks">
+          All Routines
+        </Link>
+      </div>
+      <div className="navLinksDiv">
+        <Link to="/myRoutines" className="navLinks">
+          My Routines
+        </Link>
+      </div>
+      <div className="navLinksDiv">
+        <Link to="/activities" className="navLinks">
+          Activities
+        </Link>
+      </div>
       {loggedIn ? (
-        <button className="navBtns" onClick={onLogoutClick}>
+        <button className="navLinks" onClick={onLogoutClick}>
           Logout
         </button>
       ) : (
-        <div>
-          <Link className="navBtns" to="/login">
+        <>
+        <div className="navLinksDiv">
+          <Link className="navLinks" to="/login">
             Login
           </Link>
-          <Link className="navBtns" to="/registration">
+        </div>
+        <div className="navLinksDiv">
+          <Link className="navLinks" to="/registration">
             Register
           </Link>
         </div>
-        
+        </>
       )}
     </div>
   );
