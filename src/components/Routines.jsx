@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { fetchRoutines, postRoutine } from "../apiAdapter";
 
 
-export default function Activities(props) {
+
+export default function Routines(props) {
 
   const [activities, setRoutines] = useState([]);
   const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const [goal, setgoal] = useState("");
   const [errorMessage, setErrorMessage] = useState("")
   const [submitMessage, setSubmitMessage] = useState("");
   
@@ -24,17 +25,17 @@ export default function Activities(props) {
     setName(event.target.value);
   };
 
-  const handleDescriptionChange = (event) => {
-    setDescription(event.target.value);
+  const handlegoalChange = (event) => {
+    setgoal(event.target.value);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      let post = await postRoutine(name, description);
+      let post = await postRoutine(name, goal);
       if(post) {
         setName("");
-        setDescription("");
+        setgoal("");
         const result = await fetchRoutines();
         setRoutines(result);
         setSubmitMessage("Succesfully posted routine!")
@@ -61,9 +62,9 @@ export default function Activities(props) {
           </label>
           <br />
           <label>
-            Routine description:
+            Routine goal:
             <br />
-            <textarea value={description} onChange={handleDescriptionChange} />
+            <textarea value={goal} onChange={handlegoalChange} />
           </label>
           <br />
           <button type="submit">Submit new routine</button>
@@ -85,9 +86,9 @@ export default function Activities(props) {
               <br />
               <p className='routinePtags'>{routine.name}</p>
               <br />
-              <label className='routineLabels'>Routine Description: </label>
+              <label className='routineLabels'>Routine goal: </label>
               <br />
-              <p className='routinePtags'>{routine.description}</p>
+              <p className='routinePtags'>{routine.goal}</p>
             </li>
           </div>
         ))}
