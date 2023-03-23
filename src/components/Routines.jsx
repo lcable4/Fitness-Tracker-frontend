@@ -1,55 +1,84 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import { fetchRoutines } from "../apiAdapter"
 
 
-const Main = ({posts, setPosts}) => {
+function Routines(props) {
+  const [routines, setRoutines] = useState ([]);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
 
-    
-  async function retrievePosts () {
-      const myPosts = await getPosts()
-      setPosts (myPosts.data.posts)
-      console.log("myposts", myPosts)
 
-  }
   useEffect(() => {
-      retrievePosts()
-  }, [])
+    async function getRoutines() {
+      const result = await fetchRoutines();
+      setRoutines(result);
+    }
+    getRoutines();
+  }, []);
+
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
+
+  const handleDescriptionChange = (event) => {
+    setDescription(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      let post = await postRoutine(name, description);
+      if(post) {
+        setName("");
+        setDescription("");
+        const result = await displayRoutines();
+        setRoutines(result);
+        setSubmitMessage("Succesfully posted routine!")
+      } else {
+        setErrorMessage("That routine already exists")
+      }
+      
+    } catch (error) {
+      setErrorMessage("An error occurred. Please try again later")
+    }
+  };
 
 
-  return(
-      <div id="main">
-          <PostList posts={posts} setPosts={setPosts}/>
-      </div>
-  )
-}
-
-
-const RoutineView = ({routine, routines, setRoutines}) => {
-  const handleDelete = (id) => {
-      deletePost(id, {setRoutines, routines})
-      setRoutines(routines.filter(routine => routine._id !== id));
-}
   return (
-      <>
-      <div id="routine-view">
-          <h1>Testing</h1>
-          <h1 id="name">{routine.name}</h1>
-          <h3 id="description">{routine.description}</h3>
-          <h3 id="duration">Duration: {routine.duration}</h3>
-          <h3 id="count">Count: {routine.count}</h3>
-          {routine.isAuthor ? (
-              <div>
-                  <button onClick={() => handleDelete(routine._id)}>Delete</button>
-                  <Link to="/EditRoutine"><button>Edit Routine</button></Link> 
-              </div>
-              ):  checkUserLoggedIn() ? (
-                  <Link to="/editRoutine" state={{ id: routine._id }}>
-                  <button type="button"></button>
-                  </Link>) :
-                  <div></div>
-              }
-      </div>
-      </>
-  )
+    <div className='Routines'>
+      <h1>Routines</h1>
+      
+      {props.loggedIn ? (
+       <form onSubmit={handleSubmit}>
+       <label>
+         Name:
+         <input type="text" value={name} onChange={handleNameChange} />
+       </label>
+       <br />
+       <label>
+         Description:
+         <textarea value={description} onChange={handleDescriptionChange} />
+       </label>
+       <br />
+       <button type="submit">Create new routine</button>
+     </form>
+      ) : (
+        <div>
+          <p>Login to create a routine</p>
+        </div>
+        
+      )}
+      {errorMessage && <div>{errorMessage}</div>}
+      {submitMessage && <p>{submitMessage}</p>}
+      <ul>
+        {routines.reverse().map(routine => (
+          <li key={routine.id}>{routine.name}</li>
+        ))}
+      </ul>
+      
+    </div>
+  );
+
 }
 
-export default RoutineView;
+export default Routines;

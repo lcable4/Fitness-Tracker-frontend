@@ -1,19 +1,18 @@
 const BASE_URL = "https://fitnesstracker-65db.onrender.com/api"
 
 
-export const getRoutines = async () => {
+export const fetchRoutines = async () => {
     try {
-        const token = localStorage.getItem("token");
-        const response = await fetch(`${url}/routines`, {
+        const response = await fetch(`${BASE_URL}/routines`, {
             headers:{
-                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
             },
         });
 
         const result = await response.json();
         return result
-    } catch (error) {
-        console.error(error);
+    } catch (err) {
+        console.error(err);
     }
 };
 
