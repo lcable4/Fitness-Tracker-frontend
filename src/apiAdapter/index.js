@@ -97,3 +97,28 @@ export const loginUser = async (username, password) => {
       console.error(err);
     }
   }
+
+  export const postRoutine = async (name, description) => {
+    try {
+      const response = await fetch(`${BASE_URL}/routines`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          name: name,
+          description: description,
+        }) 
+      });
+  
+      if (response.status === 500) {
+        return false;
+      } else {
+        const result = await response.json();
+        return result;
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
