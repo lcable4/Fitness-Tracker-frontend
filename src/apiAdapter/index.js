@@ -125,17 +125,19 @@ export const loginUser = async (username, password) => {
       console.log(err);
     }
   }
-  export const updateRoutine = async (name, goal) => {
+  export const updateRoutine = async (routineIdNumber, updatedName, updatedGoal) => {
+    console.log(typeof routineIdNumber, "STRANGE")
+    console.log(routineIdNumber, "STRANGE")
     try {
-      const response = await fetch(`${BASE_URL}/routines/6`, {
+      const response = await fetch(`${BASE_URL}/routines/${routineIdNumber}`, {
         method: "PATCH",
         headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify({
-          name: name,
-          goal: goal,
+          name: updatedName,
+          goal: updatedGoal,
         })
       });
       const result = await response.json();

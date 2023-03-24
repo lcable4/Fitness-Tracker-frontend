@@ -7,7 +7,8 @@ function RoutineDetails(props) {
     const [updatedName, setUpdatedName] = useState("");
     const [updatedGoal, setUpdatedGoal] = useState("");
     const { routineId } = useParams();
-    console.log(routine, "CREATOR NAME LOG")
+    const routineIdNumber = parseInt(routineId);
+    console.log(routine, "Routine LOG")
     console.log(props, "PROPS LOG")
     console.log(props.currentUser, "PROPS LOG")
     console.log(typeof routineId, "ROUTINEIDLOG")
@@ -27,7 +28,7 @@ function RoutineDetails(props) {
         }
       }
       fetchRoutineDetails();
-    }, [routineId]);
+    }, [routineIdNumber]);
   
 
     const handleNameChange = (event) => {
@@ -40,9 +41,14 @@ function RoutineDetails(props) {
     
       const handleSubmit = async (event) => {
         event.preventDefault();
-        const updatedRoutine = await updateRoutine(updatedName, updatedGoal, routineId);
+        console.log(typeof routineIdNumber, "routineIdNumber")
+        const updatedRoutine = await updateRoutine(routineIdNumber, updatedName, updatedGoal);
         console.log(updatedRoutine);
-        setRoutine(updatedRoutine);
+        setRoutine((prevRoutine) => ({
+            ...prevRoutine,
+            name: updatedRoutine.name,
+            goal: updatedRoutine.goal,
+          }));
       };
 
 
