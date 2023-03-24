@@ -104,6 +104,15 @@ body{
 
 
 /*Routines Tab*/
+.RoutinesTitle {
+    text-align: center;
+    font-size: 60px;
+}
+
+.RoutineLogIn {
+    text-align: center;
+}
+
 .routineListDiv{
     background-color: rgba(246, 169, 80, 0.98);
     width: 90%;
@@ -117,19 +126,28 @@ body{
 .routineList {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
     border: 1px solid black;
     margin: 20px;
     background-color: #023047ff;
     width: 70%;
     border-radius: 20px;
+    padding: 5px;
 }
 
 .routineLabels {
     font-size: 25px;
-    text-decoration: underline;
+    text-decoration: none;
+    margin-left: 25px;
+    margin-top: 5px;
 }
 
 .routinePtags{
     font-size: 18px;
+    margin-left: 40px;
+}
+
+.routineActivities {
+    font-size: 18px;
+    margin-left: 40px;
 }

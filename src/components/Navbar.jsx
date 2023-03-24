@@ -20,7 +20,7 @@ const Navbar = (props) => {
     <div id="navbar">
       <div className="navLinksDiv">
         <Link to="/" className="navLinks">
-          Home
+          Fitness Tracker
         </Link>
       </div>
       <div className="navLinksDiv">
