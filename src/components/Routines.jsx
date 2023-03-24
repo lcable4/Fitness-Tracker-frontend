@@ -62,7 +62,7 @@ export default function Routines(props) {
 
   return (
     <div className='Routines'>
-      <h1>Routines</h1>
+      <h1 className="RoutinesTitle">Routines</h1>
   
       {props.loggedIn ? (
         <>
@@ -89,7 +89,7 @@ export default function Routines(props) {
         </>
       ) : (
         <div>
-          <p>Log in to create a routine</p>
+          <p className="RoutineLogIn">Log in to create a routine</p>
         </div>
       )}
       {errorMessage && <div>{errorMessage}</div>}
