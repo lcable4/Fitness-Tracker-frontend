@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import { useParams } from 'react-router-dom';
-import { fetchRoutines, updateRoutine } from "../apiAdapter"
+import { useParams, useNavigate } from 'react-router-dom';
+import { fetchRoutines, updateRoutine, deleteRoutine } from "../apiAdapter"
 
 function RoutineDetails(props) {
     const [routine, setRoutine] = useState(null);
@@ -8,6 +8,7 @@ function RoutineDetails(props) {
     const [updatedGoal, setUpdatedGoal] = useState("");
     const { routineId } = useParams();
     const routineIdNumber = parseInt(routineId);
+    const navigate = useNavigate();
     console.log(routine, "Routine LOG")
     console.log(props, "PROPS LOG")
     console.log(props.currentUser, "PROPS LOG")
@@ -38,6 +39,15 @@ function RoutineDetails(props) {
       const handleGoalChange = (event) => {
         setUpdatedGoal(event.target.value);
       };
+
+      const handleDelete = async () => {
+        const shouldDelete = window.confirm('Are you sure you want to delete this routine?');
+        if (shouldDelete) {
+          const deletedRoutine = await deleteRoutine(routineIdNumber);
+          console.log(deletedRoutine);
+          useNavigate('/myRoutines');
+        }
+      };
     
       const handleSubmit = async (event) => {
         event.preventDefault();
@@ -61,6 +71,7 @@ function RoutineDetails(props) {
     return (
         <div className="routineDetails">
         {routine.creatorName === props.currentUser ? (
+            <>
           <form onSubmit={handleSubmit}>
             <h2>Update routine</h2>
             <label>
@@ -75,6 +86,8 @@ function RoutineDetails(props) {
             <br />
             <button type="submit">Update routine</button>
           </form>
+           <button onClick={handleDelete}>Delete routine</button>
+           </>
         ) : (
           <h2>{routine.name}</h2>
         )}

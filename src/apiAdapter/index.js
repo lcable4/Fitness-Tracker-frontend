@@ -147,3 +147,19 @@ export const loginUser = async (username, password) => {
       console.error(err);
     }
   }
+  export const deleteRoutine = async (routineIdNumber) => {
+    try {
+      const response = await fetch(`${BASE_URL}/routines/${routineIdNumber}`, {
+        method: "DELETE",
+        headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const result = await response.json();
+      console.log(result);
+      return result
+    } catch (err) {
+      console.error(err);
+    }
+}

@@ -9,6 +9,7 @@ function User(props) {
   const [goal, setGoal] = useState("");
   const [isPublic, setIsPublic] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [submitMessage, setSubmitMessage] = useState("")
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   console.log(props)
 
@@ -42,23 +43,27 @@ function User(props) {
   const handleIsPublicChange = (event) => {
     setIsPublic(event.target.checked);
   };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       let post = await postRoutine(name, goal, isPublic);
-      if(post) {
+      if (post) {
         setName("");
         setGoal("");
         setIsPublic(false);
         const result = await fetchRoutines();
-        setMyRoutines(result);
-        setErrorMessage("Succesfully posted routine!");
+        const filteredRoutines = result.filter(
+          (routine) => routine.creatorName === currentUser
+        );
+        setAllRoutines(result);
+        setMyRoutines(filteredRoutines);
+        console.log(myRoutines, "MY ROUTINES LOG SUBMIT")
+        setSubmitMessage("Successfully posted routine!");
       } else {
         setErrorMessage("Error: That routine already exists");
       }
     } catch (error) {
-      console.log(error, "ERROR")
+      console.log(error, "ERROR");
       setErrorMessage("An error occurred. Please try again later");
     }
   };
@@ -100,7 +105,7 @@ function User(props) {
               <br />
               {routine.goal}
               <br />
-              {routine.activities.slice(0, 3).map((activity) => (
+              {routine.activities.slice(0, 3).reverse().map((activity) => (
                 <div className='myRoutinesActivities' key={activity.id}>
                   <label className="myRoutinesActivityLabels">Activity</label>
                   <p>name: {activity.name}</p>
@@ -113,6 +118,7 @@ function User(props) {
           ))}
         </ul>
       </div>
+      {submitMessage && <div>{submitMessage}</div>}
       {errorMessage && <div>{errorMessage}</div>}
     </>
   );
