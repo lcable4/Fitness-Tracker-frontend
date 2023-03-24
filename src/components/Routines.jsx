@@ -2,23 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { fetchRoutines, postRoutine } from "../apiAdapter";
 import { displayActivities, postActivity } from "../apiAdapter";
 
-
-
 export default function Routines(props) {
-
   const [routines, setRoutines] = useState([]);
   const [name, setName] = useState("");
-  const [goal, setgoal] = useState("");
-  const [activites, setActivities] = useState("")
-  const [errorMessage, setErrorMessage] = useState("")
+  const [goal, setGoal] = useState("");
+  const [activities, setActivities] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [submitMessage, setSubmitMessage] = useState("");
-  
+
   useEffect(() => {
     async function getRoutines() {
       const result = await fetchRoutines();
-      console.log(result)
+      // console.log(result);
       setRoutines(result);
-
     }
 
     getRoutines();
@@ -31,37 +27,36 @@ export default function Routines(props) {
     }
 
     getActivities();
-  })
+  });
 
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
 
   const handleGoalChange = (event) => {
-    setgoal(event.target.value);
+    setGoal(event.target.value);
   };
 
-  // const handleActivitiesChange = (event) => {
-  //   setActivites(event.target.value);
-  // }
+  const handleActivitiesChange = (event) => {
+    setActivities(event.target.value);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      let post = await postRoutine(name, goal, activites);
-      if(post) {
+      let post = await postRoutine(name, goal, activities);
+      if (post) {
         setName("");
-        setgoal("");
-        setActivites("")
+        setGoal("");
+        setActivities("");
         const result = await fetchRoutines();
         setRoutines(result);
-        setSubmitMessage("Succesfully posted routine!")
+        setSubmitMessage("Successfully posted routine!");
       } else {
-        setErrorMessage("Error: That routine already exists")
+        setErrorMessage("Error: That routine already exists");
       }
-      
     } catch (error) {
-      setErrorMessage("An error occurred. Please try again later")
+      setErrorMessage("An error occurred. Please try again later");
     }
   };
 
