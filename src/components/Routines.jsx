@@ -68,29 +68,29 @@ export default function Routines(props) {
   return (
     <div className='Routines'>
       <h1>Routines</h1>
-      
+  
       {props.loggedIn ? (
         <>
-        <form onSubmit={handleSubmit} className="newRoutineForm">
-        <h3>Create a new routine</h3>
-          <label>
-            Routine name:
-            <input type="text" value={name} onChange={handleNameChange} />
-          </label>
-          <br />
-          <label>
-            Routine goal:
+          <form onSubmit={handleSubmit} className="newRoutineForm">
+            <h3>Create a new routine</h3>
+            <label>
+              Routine name:
+              <input type="text" value={name} onChange={handleNameChange} />
+            </label>
             <br />
-            <textarea value={goal} onChange={handleGoalChange} />
-          </label>
-          <br />
-          <label>
-            Routine Activities:
+            <label>
+              Routine goal:
+              <br />
+              <textarea value={goal} onChange={handleGoalChange} />
+            </label>
             <br />
-            <textarea value={activites} onChange={handleActivitiesChange} />
-          </label>
-          <button type="submit">Submit new routine</button>
-        </form>
+            <label>
+              Routine Activities:
+              <br />
+              <textarea value={activities} onChange={handleActivitiesChange} />
+            </label>
+            <button type="submit">Submit new routine</button>
+          </form>
         </>
       ) : (
         <div>
@@ -103,7 +103,7 @@ export default function Routines(props) {
       <ul className="routineListDiv">
         {routines.reverse().map(routine => (
           <div className='routine' key={routine.id}>
-            <li  className="routineList">
+            <li className="routineList">
               <label className='routineLabels'>Routine Name: </label>
               <br />
               <p className='routinePtags'>{routine.name}</p>
@@ -112,17 +112,15 @@ export default function Routines(props) {
               <br />
               <p className='routinePtags'>{routine.goal}</p>
               <br />
-              <label className='routineActivites'>Routine Activites</label>
+              <label className='routineActivites'>Routine Activities</label>
               <br />
-              {routines.activities.map(activites => {
-                <div className='activities'>
-                  <li className ="routineActivities">
-                    <label className="activityLabels"/>
-                    <p></p>
+              {routine.activities.map(activity => (
+                <div className='activities' key={activity.id}>
 
-                  </li>
+                    <label className="activityLabels">{activity.label}</label>
+                    <p>{activity.description}</p>
                 </div>
-              })}
+              ))}
             </li>
           </div>
         ))}
