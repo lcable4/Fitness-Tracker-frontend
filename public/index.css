@@ -113,6 +113,12 @@ body{
     font-size: 60px;
 }
 
+.RoutineHelper {
+    text-align: center;
+    font-size: 19px;
+    text-decoration: underline;
+}
+
 .RoutineLogIn {
     text-align: center;
 }
