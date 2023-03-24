@@ -107,17 +107,20 @@ export default function Routines(props) {
               <br />
               <p className='routinePtags'>{routine.goal}</p>
               <br />
-              <label className='routineActivites'>Routine Activities</label>
+              {routine.activities.length > 0 && (
+              <>
+              <label className='routineLabels'>Routine Activities</label>
               <br />
               {routine.activities.reverse().map(activity => (
-                <div className='activities' key={activity.id}>
-
-                    <label className="activityLabels">{activity.label}</label>
-                    <p>{activity.name}</p>
-                    <p>{activity.description}</p>
-                    <p>{activity.duraction}</p>
-                </div>
+              <div className='routineActivities' key={activity.id}>
+              <label className="activityLabels">{activity.label}</label>
+              <p>{activity.name}</p>
+              <p>{activity.description}</p>
+              <p>{activity.duraction}</p>
+              </div>
               ))}
+              </>
+            )}
             </li>
           </div>
         ))}
