@@ -10,6 +10,10 @@ body {
     margin: 0;
 }
 
+html {
+    font-family: 'Urbanist', sans-serif;
+}
+
 #navbar {
     background-color: black;
     color: white;
