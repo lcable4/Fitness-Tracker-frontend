@@ -125,3 +125,23 @@ export const loginUser = async (username, password) => {
       console.log(err);
     }
   }
+  export const updateRoutine = async (name, goal) => {
+    try {
+      const response = await fetch(`${BASE_URL}/routines/6`, {
+        method: "PATCH",
+        headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          name: name,
+          goal: goal,
+        })
+      });
+      const result = await response.json();
+      console.log(result);
+      return result
+    } catch (err) {
+      console.error(err);
+    }
+  }

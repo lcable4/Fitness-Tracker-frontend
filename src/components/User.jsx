@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { ReactDOM } from "react-dom";
 import { Link, useNavigate } from "react-router-dom";
-import { fetchRoutines, postRoutine } from "../apiAdapter";
+import { fetchRoutines, postRoutine, updateRoutine } from "../apiAdapter";
 function User(props) {
   const [allRoutines, setAllRoutines] = useState([]);
   const [myRoutines, setMyRoutines] = useState([]);
@@ -10,7 +10,7 @@ function User(props) {
   const [isPublic, setIsPublic] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  console.log(currentUser)
+  console.log(props)
 
 
   useEffect(() => {
@@ -90,21 +90,23 @@ function User(props) {
           <p>Login to create a routine</p>
         </div>
       )}
-      <div className="myRoutines">
+      
         <h3>These are your Routines</h3>
+      <div className="myRoutines">
         <ul>
           {myRoutines.reverse().map((routine) => (
             <li key={routine.id}>
-              {routine.name}
+               <Link to={`/routine/${parseInt(routine.id)}`}>{routine.name}</Link>
               <br />
               {routine.goal}
               <br />
               {routine.activities.slice(0, 3).map((activity) => (
                 <div className='myRoutinesActivities' key={activity.id}>
-                  <label className="myRoutinesActivityLabels">Activities</label>
-                  <p>{activity.name}</p>
-                  <p>{activity.description}</p>
-                  <p>{activity.duration}</p>
+                  <label className="myRoutinesActivityLabels">Activity</label>
+                  <p>name: {activity.name}</p>
+                  <p>description: {activity.description}</p>
+                  <p>duration: {activity.duration}</p>
+                  <p>count: {activity.count}</p>
                 </div>
               ))}
             </li>

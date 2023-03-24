@@ -101,3 +101,14 @@ body{
 .activity{
     height: 40%;
 }
+.newRoutineForm {
+    border: 1px solid black;
+}
+.myRoutines {
+    border: 1px solid #ffb703ff;
+    background-color: rgba(246, 169, 80, 0.98);
+}
+.myRoutinesActivities {
+    border: 1px solid black;
+    background-color: #023047ff;
+}
