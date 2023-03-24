@@ -99,7 +99,7 @@ export const loginUser = async (username, password) => {
     }
   }
 
-  export const postRoutine = async (name, description) => {
+  export const postRoutine = async (name, goal, isPublic) => {
     try {
       const response = await fetch(`${BASE_URL}/routines`, {
         method: "POST",
@@ -109,7 +109,8 @@ export const loginUser = async (username, password) => {
         },
         body: JSON.stringify({
           name: name,
-          description: description,
+          goal: goal,
+          isPublic: isPublic,
         }) 
       });
   
@@ -117,9 +118,10 @@ export const loginUser = async (username, password) => {
         return false;
       } else {
         const result = await response.json();
+        console.log(result, "RESULT LOG")
         return result;
       }
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
   }

@@ -13,6 +13,7 @@ const Main = () => {
     const [loggedIn, setLoggedIn] = useState(false);
     const [currentUser, setCurrentUser] = useState([]);
     console.log(loggedIn , "LOGGEDIN LOG MAIN")
+    console.log(currentUser, "currentUser MAIN")
     return(
         <>
         <div id="main">

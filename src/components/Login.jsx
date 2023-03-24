@@ -15,23 +15,21 @@ export default function Login(props) {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   
-  const setCurrentUser = (user) => {
-    localStorage.setItem("currentUser", JSON.stringify(user));
-    setUser(user);
-  };
 
 const handleClick = async (event) => {
   event.preventDefault();
   const result = await loginUser(username, password);
   if (result && result.token) {
     localStorage.setItem('token', result.token)
+    localStorage.setItem('currentUser', JSON.stringify(username))
     props.setLoggedIn(true)
+    props.setCurrentUser(username)
     console.log(props, "PROPS LOG")
     setResponse(result.token);
     setUsername("");
     setPassword("");
     setSubmitMessage("Successfully logged in!");
-
+    navigate("/");
 } else {
   
   setErrorMessage("There was an error trying to login, Please try again")
