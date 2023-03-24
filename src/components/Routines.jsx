@@ -109,13 +109,13 @@ export default function Routines(props) {
               <br />
               <label className='routineActivites'>Routine Activities</label>
               <br />
-              {routine.activities.reverse().map(activities => (
-                <div className='activities' key={activities.id}>
+              {routine.activities.reverse().map(activity => (
+                <div className='activities' key={activity.id}>
 
-                    <label className="activityLabels">{activities}</label>
-                    <p>{activities.name}</p>
-                    <p>{activities.description}</p>
-                    <p>{activities.duraction}</p>
+                    <label className="activityLabels">{activity.label}</label>
+                    <p>{activity.name}</p>
+                    <p>{activity.description}</p>
+                    <p>{activity.duraction}</p>
                 </div>
               ))}
             </li>
