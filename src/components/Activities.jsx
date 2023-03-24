@@ -39,7 +39,7 @@ export default function Activities(props) {
         setActivities(result);
         setSubmitMessage("Succesfully posted activity!")
       } else {
-        setErrorMessage("That activity already exists")
+        setErrorMessage("Error: That activity already exists")
       }
       
     } catch (error) {
@@ -52,19 +52,23 @@ export default function Activities(props) {
       <h1>Activities</h1>
       
       {props.loggedIn ? (
-        <form onSubmit={handleSubmit}>
+        <>
+        <form onSubmit={handleSubmit} className="newActivityForm">
+        <h3>Create a new activity</h3>
           <label>
-            Name:
+            Activity name:
             <input type="text" value={name} onChange={handleNameChange} />
           </label>
           <br />
           <label>
-            Description:
+            Activity description:
+            <br />
             <textarea value={description} onChange={handleDescriptionChange} />
           </label>
           <br />
-          <button type="submit">Create new activity</button>
+          <button type="submit">Submit new activity</button>
         </form>
+        </>
       ) : (
         <div>
           <p>Login to create an activity</p>
@@ -75,8 +79,8 @@ export default function Activities(props) {
   
       <ul className="activityListDiv">
         {activities.reverse().map(activity => (
-          <div className='activity'>
-            <li key={activity.id} className="activityList">
+          <div className='activity' key={activity.id}>
+            <li  className="activityList">
               <label className='activityLabels'>Activity Name: </label>
               <br />
               <p className='activityPtags'>{activity.name}</p>
