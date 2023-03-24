@@ -27,7 +27,7 @@ export default function Routines(props) {
     }
 
     getActivities();
-  });
+  }, []);
 
   const handleNameChange = (event) => {
     setName(event.target.value);
