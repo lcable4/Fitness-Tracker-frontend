@@ -1,14 +1,27 @@
 import React, {useState, useEffect} from 'react'
-import { useParams, useNavigate } from 'react-router-dom';
-import { fetchRoutines, updateRoutine, deleteRoutine, fetchUserRoutines } from "../apiAdapter"
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import { 
+  addActivityToRoutine, 
+  updateRoutine, 
+  deleteRoutine, 
+  fetchUserRoutines, 
+  deleteActivityFromRoutine } from "../apiAdapter"
 
 function RoutineDetails(props) {
+    
     const [routines, setRoutines] = useState(null);
     const [updatedName, setUpdatedName] = useState("");
     const [updatedGoal, setUpdatedGoal] = useState("");
+    const [activityId, setActivityId] = useState('');
+    const [count, setCount] = useState('');
+    const [duration, setDuration] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [submitMessage, setSubmitMessage] = useState('');
+    
     const { routineId } = useParams();
     const routineIdNumber = parseInt(routineId);
     const navigate = useNavigate();
+    
     console.log(routines, "Routine LOG")
     console.log(props, "PROPS LOG")
     console.log(props.currentUser, "PROPS LOG")
@@ -48,7 +61,38 @@ function RoutineDetails(props) {
           navigate('/myRoutines');
         }
       };
-    
+      
+      
+      const handleDeleteActivity = async (routineActivityId) => {
+        try {
+          console.log(routineActivityId, "ACTIVITY ID LOG")
+          console.log(typeof routineActivityId, "ACTIVITY ID LOG")
+          const result = await deleteActivityFromRoutine(routineActivityId);
+          console.log(result)
+          if(result){
+            setSubmitMessage("Activity removed from routine")
+          }
+        } catch (error) {
+          console.log(error)
+          setErrorMessage("There was an error removing this activity")
+        }
+      }
+
+      const handleAddActivity = async (event) => {
+        try {
+          event.preventDefault();
+          const result = await addActivityToRoutine(routineIdNumber, activityId, count, duration);
+          console.log(result)
+          setActivityId("");
+          setCount("");
+          setDuration("");
+          setSubmitMessage("Activity was added to this routine!")
+        } catch (error) {
+          setErrorMessage("There was an error adding this activity.")
+          console.log(error)
+        }
+      } 
+
       const handleSubmit = async (event) => {
         event.preventDefault();
         console.log(typeof routineIdNumber, "routineIdNumber")
@@ -64,29 +108,46 @@ function RoutineDetails(props) {
 
     if (!routines) {
       return <div>Loading...</div>;
-    } else {
-        console.log(routines.creatorName, "CREATOR NAME LOG")
-    }
+    } 
     console.log(props.currentUser, "PROPS LOG")
     return (
-        <div className="routineDetails">
+      <>
+        <h2>Update routine</h2>
+        <div className="routineDetailsDiv">
         {routines.creatorName === props.currentUser ? (
             <>
-          <form onSubmit={handleSubmit}>
-            <h2>Update routine</h2>
-            <label>
+          <form onSubmit={handleSubmit} className="routineDetailsForm">
+            <label className="routineDetailsLabels">
               Name:
               <input type="text" value={updatedName} onChange={handleNameChange} />
             </label>
             <br />
-            <label>
+            <label className="routineDetailsLabels">
               Goal:
               <input type="text" value={updatedGoal} onChange={handleGoalChange} />
             </label>
             <br />
             <button type="submit">Update routine</button>
           </form>
-           <button onClick={handleDelete}>Delete routine</button>
+          <button onClick={handleDelete}>Delete routine</button>
+          <br />
+           <form onSubmit={handleAddActivity} className="routineDetailsForm">
+            <label className="routineDetailsLabels">
+              Activity ID:
+              <input type="number" value={activityId} onChange={(e) => setActivityId(e.target.value)} />
+            </label>
+            <label className="routineDetailsLabels">
+              Count:
+              <input type="number" value={count} onChange={(e) => setCount(e.target.value)} />
+            </label>
+            <label className="routineDetailsLabels">
+              Duration:
+              <input type="number" value={duration} onChange={(e) => setDuration(e.target.value)} />
+            </label>
+            <button type="submit">Add Activity</button>
+        </form>
+        {errorMessage && <div>{errorMessage}</div>}
+        {submitMessage && <p>{submitMessage}</p>}
            </>
         ) : (
           <h2>{routines.name}</h2>
@@ -94,15 +155,20 @@ function RoutineDetails(props) {
         <p>{routines.goal}</p>
         <ul>
           {routines.activities.reverse().slice(0, 5).map((activity) => (
-            <li key={activity.id}>
+            <li key={activity.id} className="routineDetailsList">
               <h3>Activity name: {activity.name}</h3>
               <p>Activity description: {activity.description}</p>
               <p>Duration: {activity.duration}</p>
               <p>Count: {activity.count}</p>
+              <button onClick={() => handleDeleteActivity(activity.routineActivityId)}>Delete</button>
             </li>
+            
           ))}
         </ul>
+
       </div>
+        <Link to="/myRoutines">Go back</Link>
+      </>
     );
   }
   

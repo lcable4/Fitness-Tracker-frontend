@@ -113,6 +113,45 @@ export const loginUser = async (username, password) => {
     }
   }
 
+export const addActivityToRoutine = async (routineId, activityId, count, duration) => {
+    try {
+      const response = await fetch(`${BASE_URL}/routines/${routineId}/activities`, {
+        method: "POST",
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          activityId: activityId,
+          count: count, 
+          duration: duration
+        })
+      });
+      const result = await response.json();
+      console.log(result);
+      return result
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  export const deleteActivityFromRoutine = async (routineActivityId) => {
+    try {
+      console.log(routineActivityId, "routineActivityId LOG")
+      console.log(typeof routineActivityId, "routineActivityId LOG")
+      const response = await fetch(`${BASE_URL}/routine_activities/${routineActivityId}`, {
+        headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const result = await response.json();
+      console.log(result);
+      return result
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   export const postRoutine = async (name, goal, isPublic) => {
     try {
       const response = await fetch(`${BASE_URL}/routines`, {

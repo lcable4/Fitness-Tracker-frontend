@@ -88,22 +88,22 @@ function User(props) {
       
         <h3>These are your Routines</h3>
       <div className="myRoutines">
-        <ul>
+        <ul className="myRoutinesUL">
           {myRoutines.reverse().slice(0,5).map((routine) => (
-            <li key={routine.id}>
-               <Link to={`/routine/${parseInt(routine.id)}`}>{routine.name}</Link>
+            <li key={routine.id} className="myRoutinesList">
+               <Link to={`/routine/${parseInt(routine.id)}`} className="myRoutinesLinks">{routine.name}</Link>
               <br />
-              {routine.goal}
+              <p className="myRoutinesPtags">{routine.goal}</p>
               <br />
-              <p>Public: {routine.isPublic ? "Yes" : "No"}</p>
+              <p className="myRoutinesPtags">Public: {routine.isPublic ? "Yes" : "No"}</p>
               <br />
               {routine.activities.reverse().slice(0, 3).map((activity) => (
                 <div className='myRoutinesActivities' key={activity.id}>
                   <label className="myRoutinesActivityLabels">Activity</label>
-                  <p>name: {activity.name}</p>
-                  <p>description: {activity.description}</p>
-                  <p>duration: {activity.duration}</p>
-                  <p>count: {activity.count}</p>
+                  <p className="myRoutinesActPtags">name: {activity.name}</p>
+                  <p className="myRoutinesActPtags">description: {activity.description}</p>
+                  <p className="myRoutinesActPtags">duration: {activity.duration}</p>
+                  <p className="myRoutinesActPtags">count: {activity.count}</p>
                 </div>
               ))}
             </li>

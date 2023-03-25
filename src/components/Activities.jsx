@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { displayActivities, postActivity } from "../apiAdapter";
+import { addActivityToRoutine, displayActivities, postActivity } from "../apiAdapter";
 
 
 export default function Activities(props) {
@@ -9,7 +9,9 @@ export default function Activities(props) {
   const [description, setDescription] = useState("");
   const [errorMessage, setErrorMessage] = useState("")
   const [submitMessage, setSubmitMessage] = useState("");
-  
+  console.log(activities)
+
+
   useEffect(() => {
     async function fetchActivities() {
       const result = await displayActivities();
@@ -81,6 +83,7 @@ export default function Activities(props) {
         {activities.reverse().map(activity => (
           <div className='activity' key={activity.id}>
             <li  className="activityList">
+              <p>ID :{activity.id} </p>
               <label className='activityLabels'>Activity Name: </label>
               <br />
               <p className='activityPtags'>{activity.name}</p>
