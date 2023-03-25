@@ -16,16 +16,16 @@ function RoutineDetails(props) {
 
     useEffect(() => {
       async function fetchRoutineDetails() {
-        const allRoutines = await fetchUserRoutines();
+        const allRoutines = await fetchUserRoutines(props.currentUser);
         console.log(allRoutines, "ROUTINES LOG")
-        // const filteredRoutines = allRoutines.filter(
-        //   (routine) => routine.id === parseInt(routineId)
-        // );
-        // console.log(filteredRoutines, "FILTERED LOG")
-        if (allRoutines) {
-            setRoutines(allRoutines);
-            setUpdatedName(allRoutines.name);
-            setUpdatedGoal(allRoutines.goal);
+        const filteredRoutines = allRoutines.filter(
+          (routine) => routine.id === parseInt(routineId)
+        );
+        console.log(filteredRoutines, "FILTERED LOG")
+        if (filteredRoutines.length > 0) {
+          setRoutines(filteredRoutines[0]);
+          setUpdatedName(filteredRoutines[0].name);
+          setUpdatedGoal(filteredRoutines[0].goal);
         }
       }
       fetchRoutineDetails();
@@ -93,7 +93,7 @@ function RoutineDetails(props) {
         )}
         <p>{routines.goal}</p>
         <ul>
-          {routines.activities.map((activity) => (
+          {routines.activities.reverse().slice(0, 5).map((activity) => (
             <li key={activity.id}>
               <h3>Activity name: {activity.name}</h3>
               <p>Activity description: {activity.description}</p>
