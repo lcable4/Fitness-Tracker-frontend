@@ -18,6 +18,7 @@ function UpdateForm(props) {
   console.log(routines, "ROUTINES LOG")
 
   const handleEditActivity = async (routineActivityId, count, duration) => {
+    
     editActivity(routineActivityId, count, duration)
     .then((data) => {
       console.log("Activity updated successfully:", data);
