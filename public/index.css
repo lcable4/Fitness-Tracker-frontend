@@ -68,11 +68,12 @@ body{
     border: 1px solid #ffb703ff;
     background-color: rgba(246, 169, 80, 0.98);
 }
-.activityListDiv, .routineDetailsDiv{
+.activityListDiv {
     height: 750px;
     display: flex;
     width: 90%;
     flex-direction: column;
+    justify-content: space-evenly;
     overflow: scroll;
     overflow-x: hidden;
     border: 1px solid #ffb703ff;
@@ -90,7 +91,7 @@ body{
     background-color: #023047ff;
     border-radius: 20px;
 }
-.activityLabels, .routineDetailsLabels{
+.activityLabels{
     border-bottom: 1px solid black;
     text-align: center;
     padding: 10px;
@@ -103,6 +104,23 @@ body{
 }
 .newRoutineForm, .routineDetailsForm {
     border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.routineDetailsDiv{
+    height: 750px;
+    display: flex;
+    width: 90%;
+    flex-direction: column;
+    overflow: scroll;
+    overflow-x: hidden;
+    border: 1px solid #ffb703ff;
+    background-color: rgba(246, 169, 80, 0.98);
+}
+.routineDetailsLabels{
+    text-align: center;
+    padding: 10px;
 }
 .myRoutinesLinks {
     text-decoration: none;
@@ -120,4 +138,8 @@ body{
     background-color: rgb(2, 66, 98);
     margin-bottom: 10px;
     width: 250px;
+    box-shadow: 5px 5px 10px black;
+}
+.backBtns {
+    color: white;
 }

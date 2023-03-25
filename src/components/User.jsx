@@ -93,13 +93,15 @@ function User(props) {
             <li key={routine.id} className="myRoutinesList">
                <Link to={`/routine/${parseInt(routine.id)}`} className="myRoutinesLinks">{routine.name}</Link>
               <br />
-              <p className="myRoutinesPtags">{routine.goal}</p>
+              <p className="myRoutinesPtags">Routine Goal: 
+              <br />
+              {routine.goal}</p>
               <br />
               <p className="myRoutinesPtags">Public: {routine.isPublic ? "Yes" : "No"}</p>
               <br />
               {routine.activities.reverse().slice(0, 3).map((activity) => (
                 <div className='myRoutinesActivities' key={activity.id}>
-                  <label className="myRoutinesActivityLabels">Activity</label>
+                  <label className="myRoutinesActivityLabels">Activity ID: {activity.id}</label>
                   <p className="myRoutinesActPtags">name: {activity.name}</p>
                   <p className="myRoutinesActPtags">description: {activity.description}</p>
                   <p className="myRoutinesActPtags">duration: {activity.duration}</p>

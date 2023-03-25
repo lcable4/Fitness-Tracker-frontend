@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { addActivityToRoutine, displayActivities, postActivity } from "../apiAdapter";
-
+import { Link } from "react-router-dom";
 
 export default function Activities(props) {
 
@@ -52,7 +52,7 @@ export default function Activities(props) {
   return (
     <div className='Activities'>
       <h1>Activities</h1>
-      
+      <p>This is a list of all public activities created by our users.</p>
       {props.loggedIn ? (
         <>
         <form onSubmit={handleSubmit} className="newActivityForm">
@@ -73,7 +73,9 @@ export default function Activities(props) {
         </>
       ) : (
         <div>
-          <p>Login to create an activity</p>
+          <p>
+            <Link to="/login">Login </Link>
+             to create an activity</p>
         </div>
       )}
       {errorMessage && <div>{errorMessage}</div>}

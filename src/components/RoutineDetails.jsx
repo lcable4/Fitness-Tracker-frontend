@@ -107,7 +107,7 @@ function RoutineDetails(props) {
 
 
     if (!routines) {
-      return <div>Loading...</div>;
+      return <div>requires user to be logged to view</div>;
     } 
     console.log(props.currentUser, "PROPS LOG")
     return (
@@ -118,12 +118,12 @@ function RoutineDetails(props) {
             <>
           <form onSubmit={handleSubmit} className="routineDetailsForm">
             <label className="routineDetailsLabels">
-              Name:
+              Edit Name:
               <input type="text" value={updatedName} onChange={handleNameChange} />
             </label>
             <br />
             <label className="routineDetailsLabels">
-              Goal:
+              Edit Goal:
               <input type="text" value={updatedGoal} onChange={handleGoalChange} />
             </label>
             <br />
@@ -134,15 +134,25 @@ function RoutineDetails(props) {
            <form onSubmit={handleAddActivity} className="routineDetailsForm">
             <label className="routineDetailsLabels">
               Activity ID:
-              <input type="number" value={activityId} onChange={(e) => setActivityId(e.target.value)} />
+              <input 
+              type="number" 
+              placeholder="Enter the ID of the Activity you want to add" 
+              value={activityId} 
+              onChange={(e) => setActivityId(e.target.value)} />
             </label>
             <label className="routineDetailsLabels">
               Count:
-              <input type="number" value={count} onChange={(e) => setCount(e.target.value)} />
+              <input type="number"
+              placeholder='Enter new count'
+              value={count} 
+              onChange={(e) => setCount(e.target.value)} />
             </label>
             <label className="routineDetailsLabels">
               Duration:
-              <input type="number" value={duration} onChange={(e) => setDuration(e.target.value)} />
+              <input type="number" 
+              placeholder='Enter new duration'
+              value={duration} 
+              onChange={(e) => setDuration(e.target.value)} />
             </label>
             <button type="submit">Add Activity</button>
         </form>
@@ -152,7 +162,6 @@ function RoutineDetails(props) {
         ) : (
           <h2>{routines.name}</h2>
         )}
-        <p>{routines.goal}</p>
         <ul>
           {routines.activities.reverse().slice(0, 5).map((activity) => (
             <li key={activity.id} className="routineDetailsList">
@@ -167,7 +176,7 @@ function RoutineDetails(props) {
         </ul>
 
       </div>
-        <Link to="/myRoutines">Go back</Link>
+        <Link to="/myRoutines" className='backBtns'>Go back</Link>
       </>
     );
   }
