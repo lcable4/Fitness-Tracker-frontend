@@ -13,10 +13,24 @@ export const fetchRoutines = async () => {
         console.log(result)
         return result
     } catch (err) {
-        console.error(err);
+        console.log(err);
     }
 };
-
+export const fetchUserRoutines = async (username, ) => {
+  try {
+    const response = await fetch(`${BASE_URL}/users/${username}/routines`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    const result = await response.json();
+    console.log(result);
+    return result
+  } catch (error) {
+    console.log(err);
+  }
+}
 export const registerUser = async (username, password) => {
     try {
       const response = await fetch(`${BASE_URL}/users/register`, {
