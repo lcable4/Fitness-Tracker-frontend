@@ -9,10 +9,23 @@ import { Navbar,
         Activities,
         RoutineDetails,
      } from "./";
+import {displayActivities} from '../apiAdapter'
 
 const Main = () => {
     const [loggedIn, setLoggedIn] = useState(false);
     const [currentUser, setCurrentUser] = useState([]);
+    const [activities, setActivities] = useState([])
+    console.log(activities)
+
+    useEffect(() => {
+        async function fetchActivities() {
+          const result = await displayActivities();
+          setActivities(result);
+    
+        }
+    
+        fetchActivities();
+      }, []);
     console.log(loggedIn , "LOGGEDIN LOG MAIN")
     console.log(currentUser, "currentUser MAIN")
     return(
@@ -72,6 +85,7 @@ const Main = () => {
                                 currentUser={currentUser}
                                 setLoggedIn={setLoggedIn}
                                 loggedIn={loggedIn}
+                                activities={activities}
                             />
                             }
                         />
@@ -82,6 +96,7 @@ const Main = () => {
                                 setCurrentUser={setCurrentUser}
                                 loggedIn={loggedIn}
                                 setLoggedIn={setLoggedIn}
+                                activities={activities}
                             />
                             }
                         />

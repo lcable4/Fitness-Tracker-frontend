@@ -132,14 +132,15 @@ function RoutineDetails(props) {
           <button onClick={handleDelete}>Delete routine</button>
           <br />
            <form onSubmit={handleAddActivity} className="routineDetailsForm">
-            <label className="routineDetailsLabels">
+            <label className="routineDetailsLabels"/>
               Activity ID:
-              <input 
-              type="number" 
-              placeholder="Enter the ID of the Activity you want to add" 
-              value={activityId} 
-              onChange={(e) => setActivityId(e.target.value)} />
-            </label>
+              <select value={activityId} onChange={(e) => setActivityId(e.target.value)}>
+      {props.activities.map((activity) => (
+        <option key={activity.id} value={activity.id}>
+          {activity.name}
+        </option>
+      ))}
+    </select>
             <label className="routineDetailsLabels">
               Count:
               <input type="number"
