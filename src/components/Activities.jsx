@@ -59,16 +59,23 @@ export default function Activities(props) {
         <h3>Create a new activity</h3>
           <label>
             Activity name:
-            <input type="text" value={name} onChange={handleNameChange} />
+            <input
+            type="text"
+            required
+            value={name} 
+            onChange={handleNameChange} />
           </label>
           <br />
           <label>
             Activity description:
             <br />
-            <textarea value={description} onChange={handleDescriptionChange} />
+            <textarea 
+            value={description} 
+            required
+            onChange={handleDescriptionChange} />
           </label>
           <br />
-          <button type="submit">Submit new activity</button>
+          <button type="submit" className='submitBtns'>Submit new activity</button>
         </form>
         </>
       ) : (

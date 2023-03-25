@@ -5,5 +5,8 @@ export { default as HomePage } from "./HomePage";
 export { default as Registration } from "./Registration";
 export { default as Routines } from "./Routines";
 export { default as RoutineDetails } from "./RoutineDetails";
+export { default as ActivityDetails } from "./ActivityDetails";
+export { default as UpdateForm } from "./UpdateForm";
+export { default as AddForm } from "./AddForm"; 
 export { default as User } from "./User";
 export { default as Activities } from "./Activities"; 

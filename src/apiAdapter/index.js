@@ -152,6 +152,26 @@ export const addActivityToRoutine = async (routineId, activityId, count, duratio
     }
   }
 
+  export const editActivity = async (routineActivityId, count, duration) => {
+    try {
+      const response = await fetch(`${BASE_URL}/routine_activities/${routineActivityId}`, {
+        method: "PATCH",
+        headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          count: 2,
+          duration: 30
+        })
+      });
+      const result = await response.json();
+      console.log(result);
+      return result
+    } catch (err) {
+      console.error(err);
+    }
+  }
   export const postRoutine = async (name, goal, isPublic) => {
     try {
       const response = await fetch(`${BASE_URL}/routines`, {
@@ -202,7 +222,7 @@ export const addActivityToRoutine = async (routineId, activityId, count, duratio
   }
   export const deleteRoutine = async (routineIdNumber) => {
     try {
-      const response = await fetch(`${BASE_URL}/routines/${routineIdNumber}`, {
+      const response = await fetch(`${BASE_URL}/routine/${routineIdNumber}`, {
         method: "DELETE",
         headers: {
         'Content-Type': 'application/json',

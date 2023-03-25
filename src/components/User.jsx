@@ -60,17 +60,27 @@ function User(props) {
 
   return (
     <>
+    <h3 className="myRoutinesHeader">These are your Routines</h3>
+        <p className="myRoutinesPtags">Click a routine to edit it</p>
       {props.loggedIn ? (
         <form onSubmit={handleSubmit} className="newRoutineForm">
           <h3>Create a new routine</h3>
           <label>
             Routine name:
-            <input type="text" value={name} onChange={handleNameChange} />
+            <input
+             type="text"
+             required
+             value={name}
+             onChange={handleNameChange} />
           </label>
           <br />
           <label>
             Routine goal:
-            <input type="text" value={goal} onChange={handleGoalChange} />
+            <input
+            type="text"
+            required
+            value={goal} 
+            onChange={handleGoalChange} />
           </label>
           <br />
           <label>
@@ -78,15 +88,13 @@ function User(props) {
             <input type="checkbox" checked={isPublic} onChange={handleIsPublicChange} />
           </label>
           <br />
-          <button type="submit">Submit new routine</button>
+          <button type="submit" className="submitBtns">Submit new routine</button>
         </form>
       ) : (
         <div>
           <p>Login to create a routine</p>
         </div>
-      )}
-      
-        <h3>These are your Routines</h3>
+      )}     
       <div className="myRoutines">
         <ul className="myRoutinesUL">
           {myRoutines.reverse().slice(0,5).map((routine) => (

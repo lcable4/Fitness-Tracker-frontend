@@ -64,6 +64,7 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     width: 50%;
     border: 1px solid #ffb703ff;
     background-color: rgba(246, 169, 80, 0.98);
@@ -102,7 +103,18 @@ body{
 .activity{
     height: 40%;
 }
-.newRoutineForm, .routineDetailsForm {
+.newRoutineForm {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(246, 169, 80, 0.98);
+    margin: 5px;
+    padding: 5px;
+}
+
+.routineDetailsForm {
     border: 1px solid black;
     display: flex;
     flex-direction: column;
@@ -142,4 +154,15 @@ body{
 }
 .backBtns {
     color: white;
+}
+.myRoutinesPtags {
+    font-size: 20px;
+    text-align: center;
+}
+.myRoutinesHeader{
+    font-size: 30px;
+    text-align: center;
+}
+.submitBtns {
+    cursor: pointer;
 }
