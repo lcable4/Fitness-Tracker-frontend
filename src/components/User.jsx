@@ -1,35 +1,29 @@
 import { React, useState, useEffect } from "react";
 import { ReactDOM } from "react-dom";
 import { Link, useNavigate } from "react-router-dom";
-import { fetchRoutines, postRoutine } from "../apiAdapter";
+import { fetchRoutines, postRoutine, updateRoutine, fetchUserRoutines } from "../apiAdapter";
 function User(props) {
-  const [allRoutines, setAllRoutines] = useState([]);
+
   const [myRoutines, setMyRoutines] = useState([]);
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
   const [isPublic, setIsPublic] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [submitMessage, setSubmitMessage] = useState("")
+  const navigate = useNavigate();
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  console.log(currentUser)
+  console.log(props)
 
 
   useEffect(() => {
-    async function fetchAllRoutines() {
-      const result = await fetchRoutines();
-      setAllRoutines(result);
+    async function getRoutines() {
+      const result = await fetchUserRoutines(currentUser);
+      setMyRoutines(result);
     }
   
-    fetchAllRoutines();
+    getRoutines();
   }, []);
   
-  useEffect(() => {
-    const filteredRoutines = allRoutines.filter(
-      (routine) => routine.creatorName === currentUser
-    );
-    console.log(allRoutines)
-    console.log(filteredRoutines, "Filtered LOG");
-    setMyRoutines(filteredRoutines);
-  }, [allRoutines, currentUser]);
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -42,40 +36,51 @@ function User(props) {
   const handleIsPublicChange = (event) => {
     setIsPublic(event.target.checked);
   };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       let post = await postRoutine(name, goal, isPublic);
-      if(post) {
+      if (post) {
         setName("");
         setGoal("");
         setIsPublic(false);
-        const result = await fetchRoutines();
+        const result = await fetchUserRoutines(currentUser);
         setMyRoutines(result);
-        setErrorMessage("Succesfully posted routine!");
+        console.log(myRoutines, "MY ROUTINES LOG SUBMIT")
+        setSubmitMessage("Successfully posted routine!");
+        navigate("/myRoutines")
       } else {
         setErrorMessage("Error: That routine already exists");
       }
     } catch (error) {
-      console.log(error, "ERROR")
+      console.log(error, "ERROR");
       setErrorMessage("An error occurred. Please try again later");
     }
   };
 
   return (
     <>
+    <h3 className="myRoutinesHeader">These are your Routines</h3>
+        <p className="myRoutinesPtags">Click a routine to edit it</p>
       {props.loggedIn ? (
         <form onSubmit={handleSubmit} className="newRoutineForm">
           <h3>Create a new routine</h3>
           <label>
             Routine name:
-            <input type="text" value={name} onChange={handleNameChange} />
+            <input
+             type="text"
+             required
+             value={name}
+             onChange={handleNameChange} />
           </label>
           <br />
           <label>
             Routine goal:
-            <input type="text" value={goal} onChange={handleGoalChange} />
+            <input
+            type="text"
+            required
+            value={goal} 
+            onChange={handleGoalChange} />
           </label>
           <br />
           <label>
@@ -83,34 +88,39 @@ function User(props) {
             <input type="checkbox" checked={isPublic} onChange={handleIsPublicChange} />
           </label>
           <br />
-          <button type="submit">Submit new routine</button>
+          <button type="submit" className="submitBtns">Submit new routine</button>
         </form>
       ) : (
         <div>
           <p>Login to create a routine</p>
         </div>
-      )}
+      )}     
       <div className="myRoutines">
-        <h3>These are your Routines</h3>
-        <ul>
-          {myRoutines.reverse().map((routine) => (
-            <li key={routine.id}>
-              {routine.name}
+        <ul className="myRoutinesUL">
+          {myRoutines.reverse().slice(0,5).map((routine) => (
+            <li key={routine.id} className="myRoutinesList">
+               <Link to={`/routine/${parseInt(routine.id)}`} className="myRoutinesLinks">{routine.name}</Link>
               <br />
-              {routine.goal}
+              <p className="myRoutinesPtags">Routine Goal: 
               <br />
-              {routine.activities.slice(0, 3).map((activity) => (
+              {routine.goal}</p>
+              <br />
+              <p className="myRoutinesPtags">Public: {routine.isPublic ? "Yes" : "No"}</p>
+              <br />
+              {routine.activities.reverse().slice(0, 3).map((activity) => (
                 <div className='myRoutinesActivities' key={activity.id}>
-                  <label className="myRoutinesActivityLabels">Activities</label>
-                  <p>{activity.name}</p>
-                  <p>{activity.description}</p>
-                  <p>{activity.duration}</p>
+                  <label className="myRoutinesActivityLabels">Activity ID: {activity.id}</label>
+                  <p className="myRoutinesActPtags">name: {activity.name}</p>
+                  <p className="myRoutinesActPtags">description: {activity.description}</p>
+                  <p className="myRoutinesActPtags">duration: {activity.duration}</p>
+                  <p className="myRoutinesActPtags">count: {activity.count}</p>
                 </div>
               ))}
             </li>
           ))}
         </ul>
       </div>
+      {submitMessage && <div>{submitMessage}</div>}
       {errorMessage && <div>{errorMessage}</div>}
     </>
   );

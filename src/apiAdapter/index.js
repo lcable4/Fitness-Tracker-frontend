@@ -13,10 +13,24 @@ export const fetchRoutines = async () => {
         console.log(result)
         return result
     } catch (err) {
-        console.error(err);
+        console.log(err);
     }
 };
-
+export const fetchUserRoutines = async (username, ) => {
+  try {
+    const response = await fetch(`${BASE_URL}/users/${username}/routines`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    const result = await response.json();
+    console.log(result);
+    return result
+  } catch (error) {
+    console.log(err);
+  }
+}
 export const registerUser = async (username, password) => {
     try {
       const response = await fetch(`${BASE_URL}/users/register`, {
@@ -99,6 +113,65 @@ export const loginUser = async (username, password) => {
     }
   }
 
+export const addActivityToRoutine = async (routineId, activityId, count, duration) => {
+    try {
+      const response = await fetch(`${BASE_URL}/routines/${routineId}/activities`, {
+        method: "POST",
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          activityId: activityId,
+          count: count, 
+          duration: duration
+        })
+      });
+      const result = await response.json();
+      console.log(result);
+      return result
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  export const deleteActivityFromRoutine = async (routineActivityId) => {
+    try {
+      console.log(routineActivityId, "routineActivityId LOG")
+      console.log(typeof routineActivityId, "routineActivityId LOG")
+      const response = await fetch(`${BASE_URL}/routine_activities/${routineActivityId}`, {
+        headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const result = await response.json();
+      console.log(result);
+      return result
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  export const editActivity = async (routineActivityId, count, duration) => {
+    try {
+      const response = await fetch(`${BASE_URL}/routine_activities/${routineActivityId}`, {
+        method: "PATCH",
+        headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          count: 2,
+          duration: 30
+        })
+      });
+      const result = await response.json();
+      console.log(result);
+      return result
+    } catch (err) {
+      console.error(err);
+    }
+  }
   export const postRoutine = async (name, goal, isPublic) => {
     try {
       const response = await fetch(`${BASE_URL}/routines`, {
@@ -125,3 +198,41 @@ export const loginUser = async (username, password) => {
       console.log(err);
     }
   }
+  export const updateRoutine = async (routineIdNumber, updatedName, updatedGoal) => {
+    console.log(typeof routineIdNumber, "STRANGE")
+    console.log(routineIdNumber, "STRANGE")
+    try {
+      const response = await fetch(`${BASE_URL}/routines/${routineIdNumber}`, {
+        method: "PATCH",
+        headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          name: updatedName,
+          goal: updatedGoal,
+        })
+      });
+      const result = await response.json();
+      console.log(result);
+      return result
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  export const deleteRoutine = async (routineIdNumber) => {
+    try {
+      const response = await fetch(`${BASE_URL}/routine/${routineIdNumber}`, {
+        method: "DELETE",
+        headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const result = await response.json();
+      console.log(result);
+      return result
+    } catch (err) {
+      console.error(err);
+    }
+}
