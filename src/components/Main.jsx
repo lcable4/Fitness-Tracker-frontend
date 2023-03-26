@@ -7,12 +7,29 @@ import { Navbar,
         Routines,
         User,
         Activities,
+        RoutineDetails,
+        ActivityDetails,
      } from "./";
+import {displayActivities} from '../apiAdapter'
 
 const Main = () => {
     const [loggedIn, setLoggedIn] = useState(false);
     const [currentUser, setCurrentUser] = useState([]);
+    const [activities, setActivities] = useState([])
+    const [selectedActivityId, setSelectedActivityId] = useState('')
+    console.log(activities)
+
+    useEffect(() => {
+        async function fetchActivities() {
+          const result = await displayActivities();
+          setActivities(result);
+    
+        }
+    
+        fetchActivities();
+      }, []);
     console.log(loggedIn , "LOGGEDIN LOG MAIN")
+    console.log(currentUser, "currentUser MAIN")
     return(
         <>
         <div id="main">
@@ -64,12 +81,33 @@ const Main = () => {
                             }
                         />
                         <Route 
+                        path="/routine/:routineId"
+                        element={
+                            <RoutineDetails
+                                currentUser={currentUser}
+                                setLoggedIn={setLoggedIn}
+                                loggedIn={loggedIn}
+                                activities={activities}
+                            />
+                            }
+                        />
+                        <Route 
                         path="/activities"
                         element={
                             <Activities
                                 setCurrentUser={setCurrentUser}
                                 loggedIn={loggedIn}
                                 setLoggedIn={setLoggedIn}
+                                activities={activities}
+                            />
+                            }
+                        />
+                        <Route 
+                        path="/activityDetails/:activityId"
+                        element={
+                            <ActivityDetails
+                                
+                                activities={activities}
                             />
                             }
                         />
