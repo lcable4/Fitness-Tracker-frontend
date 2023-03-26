@@ -6,7 +6,7 @@ function HomePage() {
   return (
     <>
     <div className='HomePage'>
-        <h1>Welcome</h1>
+        <h1>Welcome to Fitness Tracker</h1>
         <p>Join the Fitness Tracker community today for access to free workout routines and activities.</p>
         <Link to="/registration" className="link">Sign up here</Link>
         <img
