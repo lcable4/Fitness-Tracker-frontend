@@ -2,21 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { addActivityToRoutine, displayActivities, postActivity } from "../apiAdapter";
 import { Link } from "react-router-dom";
 
-export default function Activities(props) {
 
+export default function Activities(props) {
   const [activities, setActivities] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [errorMessage, setErrorMessage] = useState("")
   const [submitMessage, setSubmitMessage] = useState("");
-  console.log(activities)
-
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   useEffect(() => {
     async function fetchActivities() {
       const result = await displayActivities();
       setActivities(result);
-
     }
 
     fetchActivities();
@@ -49,34 +47,43 @@ export default function Activities(props) {
     }
   };
 
+  const handleToggleForm = () => {
+    setIsFormOpen(!isFormOpen);
+  }
+
   return (
     <div className='Activities'>
       <h1>Activities</h1>
       <p>This is a list of all public activities created by our users.</p>
       {props.loggedIn ? (
         <>
-        <form onSubmit={handleSubmit} className="newActivityForm">
-        <h3>Create a new activity</h3>
-          <label>
-            Activity name:
-            <input
-            type="text"
-            required
-            value={name} 
-            onChange={handleNameChange} />
-          </label>
-          <br />
-          <label>
-            Activity description:
-            <br />
-            <textarea 
-            value={description} 
-            required
-            onChange={handleDescriptionChange} />
-          </label>
-          <br />
-          <button type="submit" className='submitBtns'>Submit new activity</button>
-        </form>
+          <button onClick={handleToggleForm}>
+            {isFormOpen ? "Hide" : "Create an activity"}
+          </button>
+          {isFormOpen && (
+            <form onSubmit={handleSubmit} className="newActivityForm">
+              <h3>Create a new activity</h3>
+              <label>
+                Activity name:
+                <input
+                  type="text"
+                  required
+                  value={name} 
+                  onChange={handleNameChange} />
+              </label>
+              <br />
+              <label>
+                Activity description:
+                <br />
+                <textarea 
+                  value={description} 
+                  required
+                  onChange={handleDescriptionChange} />
+              </label>
+              <br />
+              <button type="submit" className='submitBtns'>Submit new activity</button>
+            </form>
+          )}
         </>
       ) : (
         <div>
@@ -106,4 +113,4 @@ export default function Activities(props) {
       </ul>
     </div>
   );
-        }
+}

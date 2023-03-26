@@ -10,6 +10,7 @@ export default function Routines(props) {
   const [errorMessage, setErrorMessage] = useState("");
   const [submitMessage, setSubmitMessage] = useState("");
 
+
   useEffect(() => {
     async function getRoutines() {
       const result = await fetchRoutines();
@@ -40,6 +41,7 @@ export default function Routines(props) {
   const handleActivitiesChange = (event) => {
     setActivities(event.target.value);
   };
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();

@@ -16,7 +16,7 @@ export const fetchRoutines = async () => {
         console.log(err);
     }
 };
-export const fetchUserRoutines = async (username, ) => {
+export const fetchUserRoutines = async (username) => {
   try {
     const response = await fetch(`${BASE_URL}/users/${username}/routines`, {
       headers: {

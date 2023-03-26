@@ -18,6 +18,7 @@ function RoutineDetails(props) {
     const [activityId, setActivityId] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [submitMessage, setSubmitMessage] = useState('');
+    const [isFormOpen, setIsFormOpen] = useState(false);
    
     const { routineId } = useParams();
     const routineIdNumber = parseInt(routineId);
@@ -30,21 +31,31 @@ function RoutineDetails(props) {
     console.log(typeof routineId, "ROUTINEIDLOG")
 
     useEffect(() => {
-      async function fetchRoutineDetails() {
-        const allRoutines = await fetchUserRoutines(props.currentUser);
-        console.log(allRoutines, "ROUTINES LOG")
-        const filteredRoutines = allRoutines.filter(
-          (routine) => routine.id === parseInt(routineId)
-        );
-        console.log(filteredRoutines, "FILTERED LOG")
-        setFilteredResult(filteredRoutines)
-        if (filteredRoutines.length > 0) {
-          setRoutines(filteredRoutines[0]);
-          setUpdatedName(filteredRoutines[0].name);
-          setUpdatedGoal(filteredRoutines[0].goal);
+      try {
+        if(props.currentUser ) {
+          async function fetchRoutineDetails() {
+            const allRoutines = await fetchUserRoutines(props.currentUser);
+            console.log(allRoutines, "ROUTINES LOG")
+            const filteredRoutines = allRoutines.filter(
+              (routine) => routine.id === parseInt(routineId)
+            );
+            console.log(filteredRoutines, "FILTERED LOG")
+            setFilteredResult(filteredRoutines)
+            if (filteredRoutines.length > 0) {
+              setRoutines(filteredRoutines[0]);
+              setUpdatedName(filteredRoutines[0].name);
+              setUpdatedGoal(filteredRoutines[0].goal);
+            }
+          }
+
+          fetchRoutineDetails();
+        } else {
+          setErrorMessage("Please Login")
         }
+        
+      } catch (error) {
+        setErrorMessage("There was an error updating the activity")
       }
-      fetchRoutineDetails();
     }, [routineId]);
   
 
@@ -80,6 +91,10 @@ function RoutineDetails(props) {
         }
       }
 
+      const handleToggleForm = () => {
+          setIsFormOpen(!isFormOpen);
+        }
+
       const handleSubmit = async (event) => {
         event.preventDefault();
         console.log(typeof routineIdNumber, "routineIdNumber")
@@ -103,6 +118,9 @@ function RoutineDetails(props) {
         <div className="routineDetailsDiv">
         {routines.creatorName === props.currentUser ? (
             <>
+            <button onClick={handleToggleForm}>
+            {isFormOpen ? "Hide" : "Create a routine"}
+          </button>
             <p>Edit routine {routines.name}</p>
           <form onSubmit={handleSubmit} className="routineDetailsForm">
             <label className="routineDetailsLabels">

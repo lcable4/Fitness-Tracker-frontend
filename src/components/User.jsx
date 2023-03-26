@@ -10,6 +10,8 @@ function User(props) {
   const [isPublic, setIsPublic] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [submitMessage, setSubmitMessage] = useState("")
+  const [isFormOpen, setIsFormOpen] = useState(false);
+
   const navigate = useNavigate();
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   console.log(props)
@@ -17,12 +19,21 @@ function User(props) {
 
   useEffect(() => {
     async function getRoutines() {
-      const result = await fetchUserRoutines(currentUser);
-      setMyRoutines(result);
+      if(!currentUser) {
+        setErrorMessage("Please log in to view this page.")
+        return
+      }
+      try {
+        const result = await fetchUserRoutines(currentUser);
+        setMyRoutines(result);
+        
+      } catch (error) {
+        setErrorMessage("Error fetching routines.")
+      }
     }
   
     getRoutines();
-  }, []);
+  }, [currentUser]);
   
 
   const handleNameChange = (event) => {
@@ -36,6 +47,11 @@ function User(props) {
   const handleIsPublicChange = (event) => {
     setIsPublic(event.target.checked);
   };
+
+  const handleToggleForm = () => {
+    setIsFormOpen(!isFormOpen);
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -63,6 +79,11 @@ function User(props) {
     <h3 className="myRoutinesHeader">These are your Routines</h3>
         <p className="myRoutinesPtags">Click a routine to edit it</p>
       {props.loggedIn ? (
+        <>
+        <button onClick={handleToggleForm}>
+        {isFormOpen ? "Hide" : "Create a routine"}
+        </button>
+        {isFormOpen && (
         <form onSubmit={handleSubmit} className="newRoutineForm">
           <h3>Create a new routine</h3>
           <label>
@@ -90,6 +111,8 @@ function User(props) {
           <br />
           <button type="submit" className="submitBtns">Submit new routine</button>
         </form>
+        )}
+        </>
       ) : (
         <div>
           <p>Login to create a routine</p>

@@ -17,11 +17,11 @@ function UpdateForm(props) {
   console.log(filteredResult, "FILTERED RESULT LOG")
   console.log(routines, "ROUTINES LOG")
 
-  const handleEditActivity = async (routineActivityId, count, duration) => {
-    
-    editActivity(routineActivityId, count, duration)
-    .then((data) => {
-      console.log("Activity updated successfully:", data);
+  const handleEditActivity = async (event) => {
+    event.preventDefault();
+    editActivity(activityId, count, duration)
+    .then(() => {
+      console.log("Activity updated successfully:");
       setCount("");
       setDuration("");
       setSubmitMessage("Activity has been edited!")
@@ -57,7 +57,9 @@ function UpdateForm(props) {
       onChange={(e) => setCount(e.target.value)}
     />
   </label>
-  <button type="submit" onClick={()=> handleEditActivity(activityId)}>Update Activity</button>
+  <button type="submit">Update Activity</button>
+  {errorMessage && <p className="error">{errorMessage}</p>}
+  {submitMessage && <p className="success">{submitMessage}</p>}
 </form>
   )
 }
