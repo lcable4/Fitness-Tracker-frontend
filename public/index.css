@@ -151,6 +151,10 @@ body{
     margin-left: 25px;
     margin-top: 5px;
 }
+.creatorName {
+    font-size: 15px;
+    opacity: 80%;
+}
 
 .routinePtags{
     font-size: 18px;
@@ -160,4 +164,21 @@ body{
 .routineActivities {
     font-size: 18px;
     margin-left: 40px;
+}
+
+
+/*Links*/
+
+.link {
+    color: whitesmoke;
+}
+
+.goBackBtns {
+    color: whitesmoke;
+}
+
+/*Labesl*/
+
+.registrationInputs {
+    margin: 5px;
 }

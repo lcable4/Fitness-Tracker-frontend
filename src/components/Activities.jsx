@@ -71,7 +71,7 @@ export default function Activities(props) {
         </>
       ) : (
         <div>
-          <p>Login to create an activity</p>
+          <p>Log in to create an activity</p>
         </div>
       )}
       {errorMessage && <div>{errorMessage}</div>}

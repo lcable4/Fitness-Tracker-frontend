@@ -78,7 +78,7 @@ const handleClick = async (event) => {
           </p>
           <button type="submit" className='btns'>Log In</button>
           {submitMessage && <p>{submitMessage}</p>}
-          <Link to="/registration">New user? Register here</Link>
+          <Link to="/registration" className='link'>New user? Register here</Link>
         </form>
         <Link className="goBackBtns" to="/">Go Back</Link>
       </div>

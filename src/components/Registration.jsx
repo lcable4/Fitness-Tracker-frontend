@@ -101,7 +101,7 @@ export default function Registration() {
             <button className='btns' type="submit">Submit</button>
             {submitMessage && <p>{submitMessage}</p>}
             <p>
-            <Link to="/login">Already a user? Sign in</Link>
+            <Link to="/login" className='link'>Already a user? Sign in</Link>
             </p>
         </form>
         <Link className="goBackBtns" to="/">Go Back</Link>
