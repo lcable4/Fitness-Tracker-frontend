@@ -132,12 +132,12 @@ body{
     justify-content: center;
     overflow: scroll;
     overflow-x: hidden;
-    margin:5px;
+    margin-top:5px;
 }
 .routineList {
     display: flex;
     flex-direction: column;
-    align-items: left;
+    justify-content: center;
     border: 1px solid black;
     margin: 20px;
     background-color: #023047ff;
@@ -159,12 +159,12 @@ body{
 
 .routinePtags{
     font-size: 18px;
-    margin-left: 40px;
+    margin-left: 45px;
 }
 
 .routineActivities {
     font-size: 18px;
-    margin-left: 40px;
+    margin-left: 45px;
 }
 
 
