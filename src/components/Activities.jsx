@@ -52,9 +52,10 @@ export default function Activities(props) {
   }
 
   return (
-    <div className='Activities'>
-      <h1>Activities</h1>
+    <>
+    <h3>Activities</h3>
       <p>This is a list of all public activities created by our users.</p>
+      <p>Click on the activity name to see details.</p>
       {props.loggedIn ? (
         <>
           <button onClick={handleToggleForm}>
@@ -94,23 +95,28 @@ export default function Activities(props) {
       )}
       {errorMessage && <div>{errorMessage}</div>}
       {submitMessage && <p>{submitMessage}</p>}
-  
-      <ul className="activityListDiv">
-        {activities.reverse().map(activity => (
-          <div className='activity' key={activity.id}>
-            <li  className="activityList">
-              <p>ID :{activity.id} </p>
-              <label className='activityLabels'>Activity Name: </label>
-              <br />
-              <p className='activityPtags'>{activity.name}</p>
-              <br />
-              <label className='activityLabels'>Activity Description: </label>
-              <br />
-              <p className='activityPtags'>{activity.description}</p>
-            </li>
-          </div>
-        ))}
-      </ul>
-    </div>
+      <div className="allActivities">
+        <ul className='activityUL'>
+          {activities.reverse().slice(0, 20).map(activity => (
+            
+              <li  className="activityList" key={activity.id}>
+                <p>
+                  Activity name: 
+
+                <Link to={`/activitydetails/${parseInt(activity.id)}`} className="myRoutinesLinks">{activity.name}</Link>
+                </p>
+                <p>ID :{activity.id} </p>
+                <label className='activityLabels'>Activity Name: </label>
+                <br />
+                <br />
+                <label className='activityLabels'>Activity Description: </label>
+                <br />
+                <p className='activityPtags'>{activity.description}</p>
+              </li>
+            
+          ))}
+        </ul>
+      </div>
+    </>
   );
 }

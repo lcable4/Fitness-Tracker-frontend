@@ -114,39 +114,45 @@ function RoutineDetails(props) {
     console.log(props.currentUser, "PROPS LOG")
     return (
       <>
-        <h2>Update routine</h2>
+        <h3 className='myRoutinesHeader'>Update routine</h3>
+          <div className='btnsDiv'>
+            <button onClick={handleToggleForm} className='submitBtns'>
+            {isFormOpen ? "Hide" : "Edit a routine"}
+            </button>
+          </div>
         <div className="routineDetailsDiv">
         {routines.creatorName === props.currentUser ? (
             <>
-            <button onClick={handleToggleForm}>
-            {isFormOpen ? "Hide" : "Create a routine"}
-          </button>
-            <p>Edit routine {routines.name}</p>
-          <form onSubmit={handleSubmit} className="routineDetailsForm">
-            <label className="routineDetailsLabels">
-              Edit Name:
-              <input type="text" value={updatedName} onChange={handleNameChange} />
-            </label>
+            {isFormOpen && (
+              <>
+              <p>Edit routine {routines.name}</p>
+            <form onSubmit={handleSubmit} className="routineDetailsForm">
+              <label className="routineDetailsLabels">
+                Edit Name:
+                <input type="text" value={updatedName} onChange={handleNameChange} />
+              </label>
+              <br />
+              <label className="routineDetailsLabels">
+                Edit Goal:
+                <input type="text" value={updatedGoal} onChange={handleGoalChange} />
+              </label>
+              <br />
+              <button type="submit" className='submitBtns'>Update routine</button>
+            </form>
+            <button onClick={handleDelete} className='submitBtns'>Delete routine</button>
             <br />
-            <label className="routineDetailsLabels">
-              Edit Goal:
-              <input type="text" value={updatedGoal} onChange={handleGoalChange} />
-            </label>
-            <br />
-            <button type="submit" className='submitBtns'>Update routine</button>
-          </form>
-          <button onClick={handleDelete} className='submitBtns'>Delete routine</button>
-          <br />
-            <label className="routineDetailsLabels">Add an activity to this routine</label>
-        <AddForm activityId={activityId} routineIdNumber={routineIdNumber}/>
-        <UpdateForm routines={routines}/>
+              <label className="routineDetailsLabels">Add an activity to this routine</label>
+          <AddForm activityId={activityId} routineIdNumber={routineIdNumber}/>
+          <UpdateForm routines={routines}/>
+             </> 
+            )}
         {errorMessage && <div>{errorMessage}</div>}
         {submitMessage && <p>{submitMessage}</p>}
            </>
         ) : (
           <h2>{routines.name}</h2>
         )}
-        <ul>
+        <ul className='routineDetailsUL'>
           {routines.activities.reverse().slice(0, 5).map((activity) => (
             <li key={activity.id} className="routineDetailsList">
               <Link to={`/activitydetails/${parseInt(activity.id)}`} className="myRoutinesLinks">{activity.name}</Link>
@@ -161,7 +167,9 @@ function RoutineDetails(props) {
         </ul>
 
       </div>
+      <div className='btnsDiv'>
         <Link to="/myRoutines" className='backBtns'>Go back</Link>
+      </div>
       </>
     );
   }

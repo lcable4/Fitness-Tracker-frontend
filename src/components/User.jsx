@@ -77,12 +77,16 @@ function User(props) {
   return (
     <>
     <h3 className="myRoutinesHeader">These are your Routines</h3>
-        <p className="myRoutinesPtags">Click a routine to edit it</p>
+        <p className="myRoutinesPtags">Click on a routine to view it's details or update it</p>
       {props.loggedIn ? (
         <>
-        <button onClick={handleToggleForm}>
-        {isFormOpen ? "Hide" : "Create a routine"}
-        </button>
+        <div className="btnsDiv">
+          <button 
+          onClick={handleToggleForm} 
+          className='submitBtns'>
+          {isFormOpen ? "Hide" : "Create a routine"}
+          </button>
+        </div>
         {isFormOpen && (
         <form onSubmit={handleSubmit} className="newRoutineForm">
           <h3>Create a new routine</h3>
@@ -114,7 +118,7 @@ function User(props) {
         )}
         </>
       ) : (
-        <div>
+        <div className="ternaryMSG">
           <p>Login to create a routine</p>
         </div>
       )}     

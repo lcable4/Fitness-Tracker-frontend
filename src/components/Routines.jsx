@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchRoutines, postRoutine } from "../apiAdapter";
 import { displayActivities, postActivity } from "../apiAdapter";
+import { Link } from 'react-router-dom';
 
 export default function Routines(props) {
   const [routines, setRoutines] = useState([]);
@@ -103,7 +104,8 @@ export default function Routines(props) {
         {routines.reverse().map(routine => (
           <div className='routine' key={routine.id}>
             <li className="routineList">
-              <p className='routineLabels'>{routine.name} <div className='creatorName'> by {routine.creatorName}</div></p>
+            <Link to={`/routine/${parseInt(routine.id)}`} className="myRoutinesLinks">{routine.name}</Link>
+              <div className='creatorName'> by {routine.creatorName}</div>
               <br />
               <label className='routineLabels'>Routine goal: </label>
               <br />
