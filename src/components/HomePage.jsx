@@ -23,6 +23,18 @@ function HomePage() {
             <Link to="/registration" className="link">Sign up here</Link>
           </div>
         </div>
+        <div className='homeContent'>
+          <div className='homeDescription'>    
+            <h4>Explore a wide selection of workout routines and activities, and customize your own routines!</h4>
+            <br />
+            <Link to="/routines" className="link">View routines</Link>
+          </div>
+          <img
+            className="homeImg"
+            src="/photos/routines.jpg"
+            alt="weight lifting"
+            />
+        </div>
     </div>
     </>
   )

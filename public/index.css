@@ -4,335 +4,364 @@
 --blue-green: #219ebcff;
 --prussian-blue: #023047ff;
 --selective-yellow: #ffb703ff;
---ut-orange: #fb8500ff; */ */
-
-
-html {
-    font-family: 'Urbanist', sans-serif;
-    height: 100%;
+--ut-orange: #fb8500ff; */
+*/ html {
+  font-family: "Urbanist", sans-serif;
+  height: 100%;
 }
-body{
-    margin: 0;
-    height: 100%;
-    width: 100%;
-    background-color: #023047ff;
-    color: white;
+body {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #023047ff;
+  color: white;
 }
 
 #navbar {
-    background-color: rgba(246, 169, 80, 0.98);
-    color: white;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    text-align: center;
-    flex-grow: 1;
-    height: 60px;
-    position: relative;
+  background-color: rgba(246, 169, 80, 0.98);
+  color: white;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  flex-grow: 1;
+  height: 60px;
+  position: relative;
 }
 
 .navLinksDiv {
-    flex: 1;
-    border: 1px solid #ffb703ff;
-    height: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    align-content: center;
-    font-size: 20px;
+  flex: 1;
+  border: 1px solid #ffb703ff;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  font-size: 20px;
 }
 .navLinks {
-    color: white;
-    text-decoration: none;
-    height: 100%;
-    margin-top: 12px;
+  color: white;
+  text-decoration: none;
+  height: 100%;
+  margin-top: 12px;
 }
-.navBars{
-    height: 100%;
-    width: 35px;
-    background-color: rgba(246, 169, 80, 0.678);
-    color: white;
-    border: none;
+.navBars {
+  height: 100%;
+  width: 35px;
+  background-color: rgba(246, 169, 80, 0.678);
+  color: white;
+  border: none;
 }
 .menuContainer {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    color: black;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-  
-  .menuContainer .navLinksDiv {
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    background-color: rgba(246, 169, 80, 0.98);
-  }
-  
-  .menuContainer .navLinksDiv:hover {
-    background-color: rgba(246, 169, 80, 0.827);
-  }
-.registrationDiv, .loginDiv {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
-    height: 900px;
-    background-image: url("/photos/loginImg.jpg");
-    background-size: cover;
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  color: black;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
-.registrationForm, .loginForm {
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    width: 70%;
-    height: 220px;
-    font-size: 20px;
-    padding: 15px;
-    border: 1px solid #ffb703ff;
-    background-color: rgba(246, 169, 80, 0.98);
+
+.menuContainer .navLinksDiv {
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  background-color: rgba(246, 169, 80, 0.98);
 }
-.homeLogo{
-    height: 300px;
-    width: 350px;
-    margin: 15px;
+
+.menuContainer .navLinksDiv:hover {
+  background-color: rgba(246, 169, 80, 0.827);
+}
+.registrationDiv,
+.loginDiv {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  height: 900px;
+  background-image: url("/photos/loginImg.jpg");
+  background-size: cover;
+}
+.registrationForm,
+.loginForm {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 70%;
+  height: 220px;
+  font-size: 20px;
+  padding: 15px;
+  border: 1px solid #ffb703ff;
+  background-color: rgba(246, 169, 80, 0.98);
+}
+.homeLogo {
+  height: 300px;
+  width: 350px;
+  margin: 15px;
 }
 .HomePage {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .homeContent {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    background-color: rgba(246, 169, 80, 0.98);
-    border: 1px solid #ffb703ff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  background-color: rgba(246, 169, 80, 0.98);
+  border: 1px solid #ffb703ff;
+  margin: 20px;
 }
 .homeImg {
-   
-    height: 400px;
-    width: 600px;
-    
+  height: 400px;
+  width: 600px;
+  margin: 5px;
 }
-.homeDescription{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
+.homeDescription {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  margin: 5px;
 }
 .newActivityForm {
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    width: 50%;
-    border: 1px solid #ffb703ff;
-    background-color: rgba(246, 169, 80, 0.98);
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 50%;
+  border: 1px solid #ffb703ff;
+  background-color: rgba(246, 169, 80, 0.98);
 }
 
-.Activities{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.Activities {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.activityList, .routineDetailsList {
-    display: flex;
-    flex-direction: column;
-    width: 70%;
-    align-items: center;
-    text-align: center;
-    font-size: 20px;
-    border: 1px solid black;
-    margin: 5px;
-    background-color: #023047ff;
-    border-radius: 20px;
-    height: auto;
+.activityList,
+.routineDetailsList {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  align-items: center;
+  text-align: center;
+  font-size: 20px;
+  border: 1px solid black;
+  margin: 5px;
+  background-color: #023047ff;
+  border-radius: 20px;
+  height: auto;
 }
 
-
-.activityLabels{
-    border-bottom: 1px solid black;
-    text-align: center;
-    padding: 10px;
+.activityLabels {
+  border-bottom: 1px solid black;
+  text-align: center;
+  padding: 10px;
 }
-.activityPtags{
-    margin: 0;
+.activityPtags {
+  margin: 0;
 }
-.activity{
-    height: 40%;
+.activity {
+  height: 40%;
 }
 .newRoutineForm {
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(246, 169, 80, 0.98);
-    margin: 5px;
-    padding: 5px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(246, 169, 80, 0.98);
+  margin: 5px;
+  padding: 5px;
+}
+.formMSGs {
+  text-align: center;
+  align-items: center;
+}
+.updateRoutineDiv,
+.addActivityDiv,
+.activityUpdateDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  margin: 5px;
+  padding: 5px;
+  width: 100%;
 }
 
 .routineDetailsForm {
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  background-color: rgba(246, 169, 80, 0.98);
+  align-items: center;
 }
-.routineDetailsLabels{
-    text-align: center;
-    padding: 10px;
+.routineDetailsLabels {
+  text-align: center;
+  padding: 10px;
 }
 .myRoutinesLinks {
-    text-decoration: none;
-    font-size: 25px;
-    color: #ffb703ff;
-    margin: 10px;
-    cursor: pointer;
+  text-decoration: none;
+  font-size: 25px;
+  color: #ffb703ff;
+  margin: 10px;
+  cursor: pointer;
 }
-.myRoutines, .routineDetailsDiv, .routineListDiv, .allActivities {
-    border: 1px solid #ffb703ff;
-    background-image: url(/photos/routines.jpg);
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+.myRoutines,
+.routineDetailsDiv,
+.routineListDiv,
+.allActivities {
+  border: 1px solid #ffb703ff;
+  background-image: url(/photos/routines.jpg);
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
-.myRoutinesUL, .routineDetailsUL, .routineListUL, .activityUL {
-    width: 600px;
+.myRoutinesUL,
+.routineDetailsUL,
+.routineListUL,
+.activityUL {
+  width: 600px;
 }
-.myRoutinesList, .routineDetailsList {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
-    text-align: center;
-    font-size: 20px;
-    border: 1px solid black;
-    margin: 5px;
-    padding: 10px;
-    background-color: #023047ff;
-    border-radius: 20px;
-    height: auto;
+.myRoutinesList,
+.routineDetailsList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  text-align: center;
+  font-size: 20px;
+  border: 1px solid black;
+  margin: 5px;
+  padding: 10px;
+  background-color: #023047ff;
+  border-radius: 20px;
+  height: auto;
 }
 .myRoutinesActivities {
-    border: 1px solid black;
-    background-color: rgb(2, 66, 98);
-    margin-bottom: 10px;
-    width: 350px;
-    box-shadow: 5px 5px 10px black;
+  border: 1px solid black;
+  background-color: rgb(2, 66, 98);
+  margin-bottom: 10px;
+  width: 350px;
+  box-shadow: 5px 5px 10px black;
 }
 .ternaryMSG {
-    width: 100%;
-    text-align: center;
-    font-size: 20px;
-    text-decoration: none;
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  text-decoration: none;
+  color: white;
+  margin: 5px;
 }
 .backBtns {
-    color: white;
-    text-decoration: none;
-    text-align: center;
-    font-size: 20px;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  font-size: 20px;
 }
-.myRoutinesPtags, .myActivitiesPtags {
-    font-size: 20px;
-    text-align: center;
+.myRoutinesPtags,
+.myActivitiesPtags {
+  font-size: 20px;
+  text-align: center;
 }
-.myRoutinesHeader, .myActivitiesHeader {
-    font-size: 30px;
-    text-align: center;
+.myRoutinesHeader,
+.myActivitiesHeader {
+  font-size: 30px;
+  text-align: center;
 }
 .submitBtns {
-    cursor: pointer;
-    width: 20%;
-    margin: 10px;
+  cursor: pointer;
+  width: 20%;
+  margin: 10px;
 }
 .logoutBtn {
-    width: 100px;
+  width: 100px;
 }
-.btnsDiv{
-    width: 100%;
-    display: flex;
-    justify-content: center;
+.btnsDiv {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
-
 
 /*Routines Tab*/
 .RoutinesTitle {
-    text-align: center;
-    font-size: 60px;
+  text-align: center;
+  font-size: 60px;
 }
 
 .RoutineHelper {
-    text-align: center;
-    font-size: 19px;
-    text-decoration: underline;
+  text-align: center;
+  font-size: 19px;
+  text-decoration: underline;
 }
 
 .RoutineLogIn {
-    text-align: center;
+  text-align: center;
 }
 
 .routineList {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border: 1px solid black;
-    margin: 20px;
-    background-color: #023047ff;
-    width: 70%;
-    border-radius: 20px;
-    padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid black;
+  margin: 20px;
+  background-color: #023047ff;
+  width: 70%;
+  border-radius: 20px;
+  padding: 5px;
 }
 
 .routineLabels {
-    font-size: 25px;
-    text-decoration: none;
-    margin-left: 25px;
-    margin-top: 5px;
+  font-size: 25px;
+  text-decoration: none;
+  margin-left: 25px;
+  margin-top: 5px;
 }
 .creatorName {
-    font-size: 15px;
-    opacity: 80%;
+  font-size: 15px;
+  opacity: 80%;
 }
 
-.routinePtags{
-    font-size: 18px;
-    margin-left: 45px;
+.routinePtags {
+  font-size: 18px;
+  margin-left: 45px;
 }
 
 .routineActivities {
-    font-size: 18px;
-    margin-left: 45px;
+  font-size: 18px;
+  margin-left: 45px;
 }
-
 
 /*Links*/
 
 .link {
-    color: whitesmoke;
+  color: whitesmoke;
 }
 
 .goBackBtns {
-    color: whitesmoke;
+  color: whitesmoke;
 }
 
 /*Labesl*/
 
 .registrationInputs {
-    margin: 5px;
+  margin: 5px;
 }

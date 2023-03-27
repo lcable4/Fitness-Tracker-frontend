@@ -93,8 +93,8 @@ export default function Routines(props) {
           </form>
         </>
       ) : (
-        <div>
-          <p className="RoutineLogIn">Log in to share your routines</p>
+        <div className="ternaryMSG">
+          <Link to="/login" >Log in to share your routines</Link>
         </div>
       )}
       {errorMessage && <div>{errorMessage}</div>}

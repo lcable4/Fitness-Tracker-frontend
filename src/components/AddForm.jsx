@@ -33,6 +33,7 @@ function AddForm(props) {
         }
       } 
   return (
+    <div className='addActivityDiv'>
     <form onSubmit={handleAddActivity} className="routineDetailsForm">
               Activity :
               <select value={activityId} onChange={(e) => setActivityId(e.target.value)}>
@@ -58,6 +59,7 @@ function AddForm(props) {
             </label>
             <button type="submit" className='submitBtns'>Add Activity</button>
         </form>
+      </div>
   )
 }
 
