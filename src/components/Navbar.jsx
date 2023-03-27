@@ -28,13 +28,16 @@ const Navbar = (props) => {
 
   return (
     <div id="navbar">
-      <div className="navLinksDiv">
-        <button onClick={() => {
+        <button 
+        className="navBars"
+        onClick={() => {
           setIsBarsClicked(!isBarsClicked);
           setIsMenuOpen(!isMenuOpen)}
         }>
           <FaBars/>
         </button>
+      <div className="navLinksDiv">
+        <img src="/photos/FitnessTracker.png" alt="logo" />
         <Link to="/" className="navLinks">
           Fitness Tracker
         </Link>
@@ -42,7 +45,7 @@ const Navbar = (props) => {
       {isBarsClicked &&  (
         <div className="menuContainer"
         style={{ display: isMenuOpen ? "block" : "none" }}
-        onClick={() => setIsMenuOpen(true)}>
+        onMouseLeave={() => setIsMenuOpen(true)}>
           <div className="navLinksDiv">
             <Link to="/routines" className="navLinks">
               All Routines

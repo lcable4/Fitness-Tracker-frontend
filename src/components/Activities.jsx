@@ -53,9 +53,9 @@ export default function Activities(props) {
 
   return (
     <>
-    <h3>Activities</h3>
-      <p>This is a list of all public activities created by our users.</p>
-      <p>Click on the activity name to see details.</p>
+    <h3 className='myActivitiesHeader'>Activities</h3>
+      <p className='myActivitiesPtags'>This is a list of all public activities created by our users.</p>
+      <p className='myActivitiesPtags'>Click on the activity name to see details.</p>
       {props.loggedIn ? (
         <>
           <button onClick={handleToggleForm}>
@@ -87,7 +87,7 @@ export default function Activities(props) {
           )}
         </>
       ) : (
-        <div>
+        <div className='ternaryMSG'>
           <p>
             <Link to="/login">Login </Link>
              to create an activity</p>

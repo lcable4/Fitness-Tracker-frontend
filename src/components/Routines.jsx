@@ -99,36 +99,37 @@ export default function Routines(props) {
       )}
       {errorMessage && <div>{errorMessage}</div>}
       {submitMessage && <p>{submitMessage}</p>}
-  
-      <ul className="routineListDiv">
-        {routines.reverse().map(routine => (
-          <div className='routine' key={routine.id}>
-            <li className="routineList">
-            <Link to={`/routine/${parseInt(routine.id)}`} className="myRoutinesLinks">{routine.name}</Link>
-              <div className='creatorName'> by {routine.creatorName}</div>
-              <br />
-              <label className='routineLabels'>Routine goal: </label>
-              <br />
-              <p className='routinePtags'>{routine.goal}</p>
-              <br />
-              {routine.activities.length > 0 && (
-              <>
-              <label className='routineLabels'>Routine Activities</label>
-              <br />
-              {routine.activities.reverse().map(activity => (
-              <div className='routineActivities' key={activity.id}>
-              <label className="activityLabels">{activity.label}</label>
-              <p>Name: {activity.name}</p>
-              <p>Description: {activity.description}</p>
-              <p>Reps: {activity.duration}</p>
-              </div>
-              ))}
-              </>
-            )}
-            </li>
-          </div>
-        ))}
-      </ul>
+      <div className="routineListDiv">
+        <ul className='routineListUL'>
+          {routines.reverse().slice(0, 10).map(routine => (
+            <div className='routine' key={routine.id}>
+              <li className="routineList">
+              <Link to={`/routine/${parseInt(routine.id)}`} className="myRoutinesLinks">{routine.name}</Link>
+                <div className='creatorName'> by {routine.creatorName}</div>
+                <br />
+                <label className='routineLabels'>Routine goal: </label>
+                <br />
+                <p className='routinePtags'>{routine.goal}</p>
+                <br />
+                {routine.activities.length > 0 && (
+                <>
+                <label className='routineLabels'>Routine Activities</label>
+                <br />
+                {routine.activities.reverse().map(activity => (
+                <div className='routineActivities' key={activity.id}>
+                <label className="activityLabels">{activity.label}</label>
+                <p>Name: {activity.name}</p>
+                <p>Description: {activity.description}</p>
+                <p>Reps: {activity.duration}</p>
+                </div>
+                ))}
+                </>
+              )}
+              </li>
+            </div>
+          ))}
+        </ul>
+      </div>
     </div>
   );
         }
