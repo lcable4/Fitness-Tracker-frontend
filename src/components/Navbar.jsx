@@ -1,19 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, Outlet, Route, Router } from "react-router-dom";
-import { FaBars } from "react-icons/fa"
-
+import { FaBars } from "react-icons/fa";
 
 const Navbar = (props) => {
-  
   const loggedIn = props.loggedIn;
   const [isBarsClicked, setIsBarsClicked] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-   console.log(isBarsClicked, "BARS LOG")
-   console.log(isMenuOpen, "MENU LOG")
 
-  
   function onLogoutClick() {
-    console.log("been clicked");
     localStorage.removeItem("token");
     localStorage.removeItem("currentUser");
     window.location.reload(false);
@@ -28,24 +22,27 @@ const Navbar = (props) => {
 
   return (
     <div id="navbar">
-        <button 
+      <button
         className="navBars"
         onClick={() => {
           setIsBarsClicked(!isBarsClicked);
-          setIsMenuOpen(!isMenuOpen)}
-        }>
-          <FaBars/>
-        </button>
+          setIsMenuOpen(!isMenuOpen);
+        }}
+      >
+        <FaBars />
+      </button>
       <div className="navLinksDiv">
         <img src="/photos/FitnessTracker.png" alt="logo" />
         <Link to="/" className="navLinks">
           Fitness Tracker
         </Link>
       </div>
-      {isBarsClicked &&  (
-        <div className="menuContainer"
-        style={{ display: isMenuOpen ? "block" : "none" }}
-        onMouseLeave={() => setIsMenuOpen(true)}>
+      {isBarsClicked && (
+        <div
+          className="menuContainer"
+          style={{ display: isMenuOpen ? "block" : "none" }}
+          onMouseLeave={() => setIsMenuOpen(true)}
+        >
           <div className="navLinksDiv">
             <Link to="/routines" className="navLinks">
               All Routines
@@ -69,16 +66,16 @@ const Navbar = (props) => {
         </button>
       ) : (
         <>
-        <div className="navLinksDiv">
-          <Link className="navLinks" to="/login">
-            Login
-          </Link>
-        </div>
-        <div className="navLinksDiv">
-          <Link className="navLinks" to="/registration">
-            Register
-          </Link>
-        </div>
+          <div className="navLinksDiv">
+            <Link className="navLinks" to="/login">
+              Login
+            </Link>
+          </div>
+          <div className="navLinksDiv">
+            <Link className="navLinks" to="/registration">
+              Register
+            </Link>
+          </div>
         </>
       )}
     </div>

@@ -22,21 +22,16 @@ function RoutineDetails(props) {
   const routineIdNumber = parseInt(routineId);
   const navigate = useNavigate();
 
-  console.log(routines, "Routine LOG");
-  console.log(props, "PROPS LOG");
-  console.log(props.currentUser, "PROPS LOG");
-  console.log(typeof routineId, "ROUTINEIDLOG");
-
   useEffect(() => {
     try {
       if (props.currentUser) {
         async function fetchRoutineDetails() {
           const allRoutines = await fetchUserRoutines(props.currentUser);
-          console.log(allRoutines, "ROUTINES LOG");
+
           const filteredRoutines = allRoutines.filter(
             (routine) => routine.id === parseInt(routineId)
           );
-          console.log(filteredRoutines, "FILTERED LOG");
+
           setFilteredResult(filteredRoutines);
           if (filteredRoutines.length > 0) {
             setRoutines(filteredRoutines[0]);
@@ -68,17 +63,14 @@ function RoutineDetails(props) {
     );
     if (shouldDelete) {
       const deletedRoutine = await deleteRoutine(routineIdNumber);
-      console.log(deletedRoutine);
+
       navigate("/myRoutines");
     }
   };
 
   const handleDeleteActivity = async (routineActivityId) => {
     try {
-      console.log(routineActivityId, "ACTIVITY ID LOG");
-      console.log(typeof routineActivityId, "ACTIVITY ID LOG");
       const result = await deleteActivityFromRoutine(routineActivityId);
-      console.log(result);
       if (result) {
         setSubmitMessage("Activity removed from routine");
       }
@@ -94,13 +86,12 @@ function RoutineDetails(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(typeof routineIdNumber, "routineIdNumber");
     const updatedRoutine = await updateRoutine(
       routineIdNumber,
       updatedName,
       updatedGoal
     );
-    console.log(updatedRoutine);
+
     setRoutines((prevRoutine) => ({
       ...prevRoutine,
       name: updatedRoutine.name,
@@ -115,7 +106,6 @@ function RoutineDetails(props) {
       </div>
     );
   }
-  console.log(props.currentUser, "PROPS LOG");
   return (
     <>
       <h3 className="myRoutinesHeader">Update routine</h3>

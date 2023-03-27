@@ -3,7 +3,6 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { editActivity } from "../apiAdapter";
 
 const ActivityDetails = (props) => {
-  console.log(props, "propsLOG");
   const { activityId } = useParams();
   const activity = props.activities.find(
     (idx) => idx.id === parseInt(activityId)

@@ -10,17 +10,12 @@ function UpdateForm(props) {
   const [errorMessage, setErrorMessage] = useState("");
   const [submitMessage, setSubmitMessage] = useState("");
   const [filteredResult, setFilteredResult] = useState("");
-  console.log(props);
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
-  console.log(filteredResult, "FILTERED RESULT LOG");
-  console.log(routines, "ROUTINES LOG");
 
   const handleEditActivity = async (event) => {
     event.preventDefault();
     editActivity(activityId, count, duration)
       .then(() => {
-        console.log("Activity updated successfully:");
         setCount("");
         setDuration("");
         setSubmitMessage("Activity has been edited!");

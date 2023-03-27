@@ -10,7 +10,7 @@ export const fetchRoutines = async () => {
         });
 
         const result = await response.json();
-        console.log(result)
+        (result)
         return result
     } catch (err) {
         console.log(err);
@@ -25,7 +25,6 @@ export const fetchUserRoutines = async (username) => {
       },
     });
     const result = await response.json();
-    console.log(result);
     return result
   } catch (error) {
     console.log(err);
@@ -44,7 +43,7 @@ export const registerUser = async (username, password) => {
         }),
       });
       const result = await response.json();
-      console.log(result, "RESULTS LOG")
+      
       return result;
     } catch (error) {
       console.log(error);
@@ -65,7 +64,6 @@ export const loginUser = async (username, password) => {
         }),
       });
       const result = await response.json();
-      console.log(result, "RESULTS LOG");
       return result;
     } catch (error) {
       console.log(error);
@@ -127,7 +125,6 @@ export const addActivityToRoutine = async (routineId, activityId, count, duratio
         })
       });
       const result = await response.json();
-      console.log(result);
       return result
     } catch (err) {
       console.error(err);
@@ -136,8 +133,6 @@ export const addActivityToRoutine = async (routineId, activityId, count, duratio
 
   export const deleteActivityFromRoutine = async (routineActivityId) => {
     try {
-      console.log(routineActivityId, "routineActivityId LOG")
-      console.log(typeof routineActivityId, "routineActivityId LOG")
       const response = await fetch(`${BASE_URL}/routine_activities/${routineActivityId}`, {
         headers: {
         'Content-Type': 'application/json',
@@ -145,7 +140,6 @@ export const addActivityToRoutine = async (routineId, activityId, count, duratio
         },
       });
       const result = await response.json();
-      console.log(result);
       return result
     } catch (err) {
       console.error(err);
@@ -166,7 +160,6 @@ export const addActivityToRoutine = async (routineId, activityId, count, duratio
         })
       });
       const result = await response.json();
-      console.log(result);
       return result
     } catch (err) {
       console.error(err);
@@ -191,7 +184,6 @@ export const addActivityToRoutine = async (routineId, activityId, count, duratio
         return false;
       } else {
         const result = await response.json();
-        console.log(result, "RESULT LOG")
         return result;
       }
     } catch (err) {
@@ -199,8 +191,6 @@ export const addActivityToRoutine = async (routineId, activityId, count, duratio
     }
   }
   export const updateRoutine = async (routineIdNumber, updatedName, updatedGoal) => {
-    console.log(typeof routineIdNumber, "STRANGE")
-    console.log(routineIdNumber, "STRANGE")
     try {
       const response = await fetch(`${BASE_URL}/routines/${routineIdNumber}`, {
         method: "PATCH",
@@ -214,7 +204,6 @@ export const addActivityToRoutine = async (routineId, activityId, count, duratio
         })
       });
       const result = await response.json();
-      console.log(result);
       return result
     } catch (err) {
       console.error(err);
@@ -230,7 +219,6 @@ export const addActivityToRoutine = async (routineId, activityId, count, duratio
         },
       });
       const result = await response.json();
-      console.log(result);
       return result
     } catch (err) {
       console.error(err);
