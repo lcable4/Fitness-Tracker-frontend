@@ -1,28 +1,34 @@
 import React from "react";
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { editActivity } from "../apiAdapter";
 
-
 const ActivityDetails = (props) => {
-    console.log(props, "propsLOG")
-    const { activityId } = useParams();
-    const activity = props.activities.find((idx) => idx.id === parseInt(activityId));
+  console.log(props, "propsLOG");
+  const { activityId } = useParams();
+  const activity = props.activities.find(
+    (idx) => idx.id === parseInt(activityId)
+  );
 
-    if (!activity) {
-        return <div>Activity not found</div>;
-    }
+  if (!activity) {
+    return <div>Activity not found</div>;
+  }
 
-    return (
-        <>
-        <div>
-            <h2>{activity.name}</h2>
-            <p>{activity.id}</p>
-            <p>{activity.description}</p>
+  return (
+    <>
+      <div className="activityDetailsContainer">
+        <div className="activityDetails">
+          <h2>Activity name: {activity.name}</h2>
+          <p>ID: {activity.id}</p>
+          <p>Description: {activity.description}</p>
         </div>
-        <Link to="/myRoutines">Go back</Link>
-        </>
-    );
-}
+        <div className="btnsDiv">
+          <Link to="/myRoutines" className="backBtns">
+            Go back
+          </Link>
+        </div>
+      </div>
+    </>
+  );
+};
 
-
-export default ActivityDetails
+export default ActivityDetails;
